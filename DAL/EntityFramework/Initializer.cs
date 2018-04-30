@@ -125,13 +125,17 @@ namespace DAL.EntityFramework
                 {
                     Number = "1",
                     Status="Занята",
-                    RoomTypeId = (Int32)RoomTypes.Lux
+                    RoomTypeId = (Int32)RoomTypes.Lux,
+                    Capacity = 2
+
                 },
                 new Room()
                 {
                     Number = "2",
                     Status="Занята",
-                    RoomTypeId = (Int32)RoomTypes.OneSleep
+                    RoomTypeId = (Int32)RoomTypes.OneSleep,
+                    Capacity = 3 
+                    
                 }
             };
             context.Rooms.AddRange(Rooms);
