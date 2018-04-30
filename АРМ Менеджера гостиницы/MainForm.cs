@@ -81,10 +81,74 @@ namespace АРМ_Менеджера_гостиницы
 
         }
 
+        
+        private void LoadRoomsGrid()
+        {
+            //add columns
+            var columns = new DataGridViewColumn[]
+            {
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name ="Id",
+                    HeaderText = "Id"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name ="Number",
+                    HeaderText = "Номер комнаты"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name ="RoomType",
+                    HeaderText = "Тип комнаты"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name ="Price",
+                    HeaderText = "Стоимость за сутки"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name ="Capacity",
+                    HeaderText = "Вместимость"
+                }
+            };
+            foreach (var item in columns)
+            {
+                dataGridView2.Columns.Add(item);
+            }
+
+
+            var roomsGridData = _dbContext.Rooms.Select(e => 
+            new
+            {
+                e.Id,
+                e.Number,
+                Name = e.RoomType.Name,
+                e.RoomType.Cost,
+                Capacity = e.Capacity
+                
+            }).ToArray();
+            foreach (var item in roomsGridData )
+            {
+                dataGridView2.Rows.Add(
+                    item.Id,
+                    item.Number,
+                    item.Name,
+                    item.Cost,
+                    item.Capacity
+                       
+                );
+            }
+
+            dataGridView2.AllowUserToDeleteRows = _clientsRights.CanDelete;
+            dataGridView2.AllowUserToAddRows = _clientsRights.CanAdd;
+
+        }
         private void MainForm_Load(object sender, EventArgs eventArgs)
         {
             LoadClientsGrid();
-
+            LoadRoomsGrid();
             //new DataGridViewColumn(new DataGridViewTextBoxCell())
             //{
             //    Name = "ArrivalDate",
