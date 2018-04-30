@@ -69,7 +69,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RightsModel.cs" />
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -105,6 +104,10 @@
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{5c2aeda4-a285-4383-ad6a-2ceb11a3516f}</Project>
       <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{7d8ed4e0-956a-46c6-b89e-c1f9c4e0073e}</Project>
+      <Name>Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Services\Services.csproj">
       <Project>{a5740a3d-2c39-484a-816b-44a84bd7a043}</Project>

@@ -1,4 +1,6 @@
 ﻿using DAL.EntityFramework;
+using Model;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,16 +16,12 @@ namespace АРМ_Менеджера_гостиницы
     public partial class MainForm : Form
     {
 
-        private RightsModel _clientsRights;
+        private UserRightsModel _userRights;
         private ApplicationDbContext _dbContext;
 
         public MainForm()
         {
-            this._clientsRights = new RightsModel()
-            {
-                CanAdd = true,
-                CanDelete = false
-            }; //mock
+            this._userRights = RightsService.GetUserRights();
             this._dbContext = new ApplicationDbContext();
             InitializeComponent();
         }
@@ -76,14 +74,14 @@ namespace АРМ_Менеджера_гостиницы
                 );
             }
 
-            dataGridView1.AllowUserToDeleteRows = _clientsRights.CanDelete;
-            dataGridView1.AllowUserToAddRows = _clientsRights.CanAdd;
-
+            dataGridView1.AllowUserToDeleteRows = _userRights.ClientsRights.CanDelete;
+            dataGridView1.AllowUserToAddRows = _userRights.ClientsRights.CanAdd;
         }
 
         private void MainForm_Load(object sender, EventArgs eventArgs)
         {
             LoadClientsGrid();
+            //qwerty13231
 
             //new DataGridViewColumn(new DataGridViewTextBoxCell())
             //{
