@@ -138,8 +138,8 @@ namespace АРМ_Менеджера_гостиницы
                 );
             }
 
-            dataGridView2.AllowUserToDeleteRows = _clientsRights.CanDelete;
-            dataGridView2.AllowUserToAddRows = _clientsRights.CanAdd;
+            dataGridView2.AllowUserToDeleteRows = this._userRights.RoomsRights.CanDelete;
+            dataGridView2.AllowUserToAddRows = this._userRights.RoomsRights.CanAdd;
 
         }
         private void MainForm_Load(object sender, EventArgs eventArgs)
