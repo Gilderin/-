@@ -15,6 +15,5 @@ namespace DAL.Entities
 
         public Int32 RoomTypeId { get; set; }
         public RoomType RoomType { get; set; }
-        virtual public ICollection<Room> Rooms { get; set; }
     }
 }

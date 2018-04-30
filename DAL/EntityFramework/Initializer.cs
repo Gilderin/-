@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DAL.EntityFramework
 {
-    class Initializer : DropCreateDatabaseAlways<ApplicationDbContext>
+    class Initializer : CreateDatabaseIfNotExists<ApplicationDbContext>
     {
         protected override void Seed(ApplicationDbContext context)
         {
@@ -69,6 +69,28 @@ namespace DAL.EntityFramework
                 }
             };
             context.Actors.AddRange(Arc);
+            context.SaveChanges();
+            #endregion
+
+            #region Clients
+            var clients = new List<Client>()
+            {
+                new Client()
+                {
+                    Name = "Andrey",
+                    SecondName= "Cheroshey",
+                    PasportNumber = "1231241245125",
+                    DateOfBirth = new DateTimeOffset()
+                },
+                new Client()
+                {
+                    Name = "Egor",
+                    SecondName= "Vasilev",
+                    PasportNumber = "2343242434",
+                    DateOfBirth = new DateTimeOffset()
+                }
+            };
+            context.Clients.AddRange(clients);
             context.SaveChanges();
             #endregion
 

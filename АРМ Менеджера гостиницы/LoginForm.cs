@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace АРМ_Менеджера_гостиницы
 {
-    public partial class Form1 : Form
+    public partial class LoginForm : Form
     {
-        public Form1()
+        public LoginForm()
         {
             InitializeComponent();
         }
@@ -38,7 +38,7 @@ namespace АРМ_Менеджера_гостиницы
                     //Запрос в базу какие права, и передавать из в вторую форму, при инициализации просто прописывать, какие из 
                     // лэйблов или чего не будет
 
-                    Form2 f = new Form2();
+                    MainForm f = new MainForm();
                     f.Show();
                     return;
                 }

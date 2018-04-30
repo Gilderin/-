@@ -18,10 +18,14 @@ namespace АРМ_Менеджера_гостиницы
         {
             //"DefaultDbConnection"
             var context = new ApplicationDbContext();
-            context.Database.CreateIfNotExists();
+            if (!context.Database.Exists())
+            {
+                context.Database.Initialize(true);
+            }          
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            //Application.Run(new LoginForm());
+            Application.Run(new MainForm());
         }
     }
 }
