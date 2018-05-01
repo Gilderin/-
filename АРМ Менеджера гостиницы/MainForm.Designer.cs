@@ -46,7 +46,7 @@
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.splitContainer5 = new System.Windows.Forms.SplitContainer();
+     
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
