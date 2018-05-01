@@ -17,7 +17,7 @@ namespace Services
                 CanRead = true,
                 CanEdit = true,
                 CanAdd = true,
-                CanDelete = false
+                CanDelete = true
             }; //mock
 
             return rights;
