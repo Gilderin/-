@@ -28,7 +28,7 @@ namespace АРМ_Менеджера_гостиницы
         }
 
         #region clients
-        private BindingSource _clientsBindingSource = new BindingSource();
+      
         private void LoadClientsGrid()
         {
             //load data
@@ -42,8 +42,8 @@ namespace АРМ_Менеджера_гостиницы
                     e.DateOfBirth
                 })
                 .ToList();
-            _clientsBindingSource.DataSource = clientGridData;
-            dataGridView1.DataSource = this._clientsBindingSource;
+          
+            dataGridView1.DataSource = new BindingSource { DataSource = clientGridData };
 
             //setup columns
             dataGridView1.Columns.Clear();
@@ -102,42 +102,7 @@ namespace АРМ_Менеджера_гостиницы
 
         private void LoadRoomsGrid()
         {
-            //add columns
-            var columns = new DataGridViewColumn[]
-            {
-                new DataGridViewColumn(new DataGridViewTextBoxCell())
-                {
-                    Name ="Id",
-                    HeaderText = "Id"
-                },
-                new DataGridViewColumn(new DataGridViewTextBoxCell())
-                {
-                    Name ="Number",
-                    HeaderText = "Номер комнаты"
-                },
-                new DataGridViewColumn(new DataGridViewTextBoxCell())
-                {
-                    Name ="RoomType",
-                    HeaderText = "Тип комнаты"
-                },
-                new DataGridViewColumn(new DataGridViewTextBoxCell())
-                {
-                    Name ="Price",
-                    HeaderText = "Стоимость за сутки"
-                },
-                new DataGridViewColumn(new DataGridViewTextBoxCell())
-                {
-                    Name ="Capacity",
-                    HeaderText = "Вместимость"
-                }
-            };
-            foreach (var item in columns)
-            {
-                dataGridView2.Columns.Add(item);
-            }
-
-
-            var roomsGridData = _dbContext.Rooms.Select(e => 
+            var roomsGridData = _dbContext.Rooms.Select(e =>
             new
             {
                 e.Id,
@@ -145,9 +110,13 @@ namespace АРМ_Менеджера_гостиницы
                 Name = e.RoomType.Name,
                 e.RoomType.Cost,
                 Capacity = e.Capacity
-                
+
             }).ToArray();
-            foreach (var item in roomsGridData )
+            dataGridView2.DataSource = new BindingSource { DataSource = roomsGridData };
+
+            //setup columns
+            dataGridView2.Columns.Clear();
+            foreach (var item in roomsGridData)
             {
                 dataGridView2.Rows.Add(
                     item.Id,
@@ -155,62 +124,69 @@ namespace АРМ_Менеджера_гостиницы
                     item.Name,
                     item.Cost,
                     item.Capacity
-                       
+
                 );
             }
-
-            dataGridView2.AllowUserToDeleteRows = true;
-            dataGridView2.AllowUserToAddRows = true;
-
-        }
-
-        private void LoadEmployeesGrid()
-        {
             //add columns
             var columns = new DataGridViewColumn[]
             {
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
                     Name ="Id",
+                    DataPropertyName = "Id",
                     HeaderText = "Id"
                 },
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
-                    Name ="Name",
-                    HeaderText = "Имя"
+                    Name ="Number",
+                    DataPropertyName = "Nunmer",
+                    HeaderText = "Номер комнаты"
                 },
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
-                    Name ="SecondName",
-                    HeaderText = "Фамилия"
+                    Name ="RoomType",
+                    DataPropertyName = "Name",
+                    HeaderText = "Тип комнаты"
                 },
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
-                    Name ="Position",
-                    HeaderText = "Должность"
+                    Name ="Price",
+                    DataPropertyName = "Cost",
+                    HeaderText = "Стоимость за сутки"
                 },
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
-                    Name ="NumberPhone",
-                    HeaderText = "Номер телефона"
+                    Name ="Capacity",
+                    DataPropertyName = "Capacity",
+                    HeaderText = "Вместимость"
                 }
             };
             foreach (var item in columns)
             {
-                dataGridView3.Columns.Add(item);
+                dataGridView2.Columns.Add(item);
             }
+            dataGridView2.AllowUserToDeleteRows = this._userRights.RoomsRights.CanDelete;
+            dataGridView2.AllowUserToAddRows = this._userRights.RoomsRights.CanAdd;
 
+        }
+
+        private void LoadEmployeesGrid()
+        {
 
             var employeesGridData = _dbContext.Employees.Select(e =>
-            new
-            {
-                e.Id,
-                e.Name,
-                e.SecondName,
-                e.Position,
-                e.NumberPhone
+           new
+           {
+               e.Id,
+               e.Name,
+               e.SecondName,
+               e.Position,
+               e.NumberPhone
 
-            }).ToArray();
+           }).ToArray();
+            dataGridView3.DataSource = new BindingSource { DataSource = employeesGridData };
+
+            //setup columns
+            dataGridView3.Columns.Clear();
             foreach (var item in employeesGridData)
             {
                 dataGridView3.Rows.Add(
@@ -222,75 +198,54 @@ namespace АРМ_Менеджера_гостиницы
 
                 );
             }
-
-            dataGridView2.AllowUserToDeleteRows = this._userRights.EmployeesRights.CanDelete;
-            dataGridView2.AllowUserToAddRows = this._userRights.EmployeesRights.CanAdd;
-
-        }
-
-        private void LoadPaymentGrid()
-        {
             //add columns
             var columns = new DataGridViewColumn[]
             {
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
                     Name ="Id",
+                    DataPropertyName = "Id",
                     HeaderText = "Id"
                 },
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
                     Name ="Name",
+                    DataPropertyName = "Name",
                     HeaderText = "Имя"
                 },
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
                     Name ="SecondName",
+                     DataPropertyName = "SecondName",
                     HeaderText = "Фамилия"
                 },
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
-                Name = "ArrivalDate",
-                HeaderText = "Дата въезда"
+                    Name ="Position",
+                    DataPropertyName = "Position",
+                    HeaderText = "Должность"
                 },
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
-                    Name = "DapartureDate",
-                    HeaderText = "Дата выезда"
-                },
-                new DataGridViewColumn(new DataGridViewTextBoxCell())
-                {
-                    Name = "Capacity",
-                    HeaderText = "Количество человек"
-                },
-                new DataGridViewColumn(new DataGridViewTextBoxCell())
-                {
-                    Name = "Number",
-                    HeaderText = "Номер комнаты"
-                },
-                 new DataGridViewColumn(new DataGridViewTextBoxCell())
-                {
-                    Name = "Cost",
-                    HeaderText = "Стоимость номера"
-                },
-                new DataGridViewColumn(new DataGridViewTextBoxCell())
-                {
-                    Name = "ReceiptOfPayment",
-                    HeaderText = "Оплата"
-                },
-                  new DataGridViewColumn(new DataGridViewTextBoxCell())
-                {
-                    Name = "EmployeeSecondName",
-                    HeaderText = "Сотрудник оформивший"
+                    Name ="NumberPhone",
+                    DataPropertyName = "NumberPhone",
+                    HeaderText = "Номер телефона"
                 }
-
             };
             foreach (var item in columns)
             {
-                dataGridView4.Columns.Add(item);
+                dataGridView3.Columns.Add(item);
             }
 
 
+           
+            dataGridView3.AllowUserToDeleteRows = this._userRights.EmployeesRights.CanDelete;
+            dataGridView3.AllowUserToAddRows = this._userRights.EmployeesRights.CanAdd;
+
+        }
+
+        private void LoadPaymentGrid()
+        {
             var paymentsGridData = _dbContext.Payments.Select(e =>
             new
             {
@@ -303,10 +258,15 @@ namespace АРМ_Менеджера_гостиницы
                 e.Room.Number,
                 e.Room.RoomType.Cost,
                 e.ReceiptOfPayment,
-                EmployeeName= e.Employee.SecondName,
+                EmployeeName = e.Employee.SecondName,
 
 
             }).ToArray();
+
+            dataGridView4.DataSource = new BindingSource { DataSource = paymentsGridData };
+
+            //setup columns
+            dataGridView4.Columns.Clear();
             foreach (var item in paymentsGridData)
             {
                 dataGridView4.Rows.Add(
@@ -323,6 +283,78 @@ namespace АРМ_Менеджера_гостиницы
                 );
             }
 
+            //add columns
+            var columns = new DataGridViewColumn[]
+            {
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name ="Id",
+                    DataPropertyName = "Id",
+                    HeaderText = "Id"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name ="Name",
+                    DataPropertyName = "Name",
+                    HeaderText = "Имя"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name ="SecondName",
+                    DataPropertyName = "SecondName",
+                    HeaderText = "Фамилия"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                Name = "ArrivalDate",
+                DataPropertyName = "ArrivalDate",
+                HeaderText = "Дата въезда"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name = "DapartureDate",
+                    DataPropertyName = "DepartureDate",
+                    HeaderText = "Дата выезда"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name = "Capacity",
+                    DataPropertyName = "PeopleCount",
+                    HeaderText = "Количество человек"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name = "Number",
+                    DataPropertyName = "Number",
+                    HeaderText = "Номер комнаты"
+                },
+                 new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name = "Cost",
+                    DataPropertyName = "Cost",
+                    HeaderText = "Стоимость номера"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name = "ReceiptOfPayment",
+                    DataPropertyName = "ReceiptOfPayment",
+                    HeaderText = "Оплата"
+                },
+                  new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name = "EmployeeSecondName",
+                    DataPropertyName = "EmployeeName",
+                    HeaderText = "Сотрудник оформивший"
+                }
+
+            };
+            foreach (var item in columns)
+            {
+                dataGridView4.Columns.Add(item);
+            }
+
+
+            
          dataGridView4.AllowUserToDeleteRows = this._userRights.PaymentsRigths.CanDelete;
          dataGridView4.AllowUserToAddRows = this._userRights.PaymentsRigths.CanAdd;
 
