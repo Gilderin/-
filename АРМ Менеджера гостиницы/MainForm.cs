@@ -29,11 +29,11 @@ namespace АРМ_Менеджера_гостиницы
         }
 
         #region clients
-        private List<ClientsGridModel> _clientsGridData;
+        private BindingList<ClientsGridModel> _clientsGridData;
         private void LoadClientsGrid()
         {
             //load data
-            _clientsGridData = _dbContext.Clients
+            var clientsGridData = _dbContext.Clients
                 .Select(e => new ClientsGridModel()
                 {
                     Id = e.Id,
@@ -43,10 +43,12 @@ namespace АРМ_Менеджера_гостиницы
                     DateOfBirth = e.DateOfBirth
                 })
                 .ToList();
-            dataGridView1.DataSource = new BindingSource() { DataSource = _clientsGridData };
+            _clientsGridData = new BindingList<ClientsGridModel>(clientsGridData);
+            var clientsBindingSource = new BindingSource(_clientsGridData, null);
+            clientsDataGridView.DataSource = clientsBindingSource;
 
             //setup columns
-            dataGridView1.Columns.Clear();
+            clientsDataGridView.Columns.Clear();
             var columns = new DataGridViewColumn[]
             {
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
@@ -86,23 +88,63 @@ namespace АРМ_Менеджера_гостиницы
             };
             foreach (var item in columns)
             {
-                dataGridView1.Columns.Add(item);
+                clientsDataGridView.Columns.Add(item);
             }
 
-            dataGridView1.MultiSelect = false;
-            dataGridView1.AllowUserToDeleteRows = _userRights.ClientsRights.CanDelete;
-            dataGridView1.AllowUserToAddRows = _userRights.ClientsRights.CanAdd;
+            clientsDataGridView.MultiSelect = false;
+            clientsDataGridView.AllowUserToDeleteRows = _userRights.ClientsRights.CanDelete;
+            clientsDataGridView.AllowUserToAddRows = _userRights.ClientsRights.CanAdd;
         }
-        private void UpdateClientsGrid()
+        private void UpdateClientsGridDbData()
         {
+            var dbData = _dbContext.Clients.ToList();
 
+            //remove deleted from db
+            var toRemove = dbData
+                .Where(dbClient => !_clientsGridData.Any(e => dbClient.Id == e.Id))
+                .ToList();
+            _dbContext.Clients.RemoveRange(toRemove);
+
+            //add new clients to db
+            var toAdd = _clientsGridData
+                .Where(dataGridClient => !dbData.Any(e => dataGridClient.Id == e.Id))
+                .Select(e => new Client()
+                {
+                    Name = e.Name,
+                    SecondName = e.SecondName,
+                    PassportNumber = e.PassportNumber,
+                    DateOfBirth = e.DateOfBirth
+                })
+                .ToList();
+            _dbContext.Clients.AddRange(toAdd);
+            _dbContext.SaveChanges();
         }
         private void RefreshClientsGrid()
         {
-
+            this._clientsGridData.Clear();
+            var data = _dbContext.Clients.Select(e => new ClientsGridModel()
+            {
+                Id = e.Id,
+                Name = e.Name,
+                SecondName = e.SecondName,
+                PassportNumber = e.PassportNumber,
+                DateOfBirth = e.DateOfBirth
+            })
+            .ToList();
+            foreach (var item in data)
+            {
+                this._clientsGridData.Add(item);
+            }
+        }
+        private void clientsUpdateDbButton_Click(object sender, EventArgs e)
+        {
+            UpdateClientsGridDbData();
+        }
+        private void clientsRefreshGridButton_Click(object sender, EventArgs e)
+        {
+            RefreshClientsGrid();
         }
         #endregion
-
 
         private void LoadRoomsGrid()
         {
@@ -120,17 +162,17 @@ namespace АРМ_Менеджера_гостиницы
 
             //setup columns
             dataGridView2.Columns.Clear();
-            foreach (var item in roomsGridData)
-            {
-                dataGridView2.Rows.Add(
-                    item.Id,
-                    item.Number,
-                    item.Name,
-                    item.Cost,
-                    item.Capacity
+            //foreach (var item in roomsGridData)
+            //{
+            //    dataGridView2.Rows.Add(
+            //        item.Id,
+            //        item.Number,
+            //        item.Name,
+            //        item.Cost,
+            //        item.Capacity
 
-                );
-            }
+            //    );
+            //}
             //add columns
             var columns = new DataGridViewColumn[]
             {
@@ -191,17 +233,17 @@ namespace АРМ_Менеджера_гостиницы
 
             //setup columns
             dataGridView3.Columns.Clear();
-            foreach (var item in employeesGridData)
-            {
-                dataGridView3.Rows.Add(
-                    item.Id,
-                    item.Name,
-                    item.SecondName,
-                    item.Position,
-                    item.NumberPhone
+            //foreach (var item in employeesGridData)
+            //{
+            //    dataGridView3.Rows.Add(
+            //        item.Id,
+            //        item.Name,
+            //        item.SecondName,
+            //        item.Position,
+            //        item.NumberPhone
 
-                );
-            }
+            //    );
+            //}
             //add columns
             var columns = new DataGridViewColumn[]
             {
@@ -271,21 +313,21 @@ namespace АРМ_Менеджера_гостиницы
 
             //setup columns
             dataGridView4.Columns.Clear();
-            foreach (var item in paymentsGridData)
-            {
-                dataGridView4.Rows.Add(
-                    item.Id,
-                    item.Name,
-                    item.SecondName,
-                    item.ArrivalDate,
-                    item.DepartureDate,
-                    item.PeopleCount,
-                    item.Number,
-                    item.Cost,
-                    item.ReceiptOfPayment,
-                    item.EmployeeName
-                );
-            }
+            //foreach (var item in paymentsGridData)
+            //{
+            //    dataGridView4.Rows.Add(
+            //        item.Id,
+            //        item.Name,
+            //        item.SecondName,
+            //        item.ArrivalDate,
+            //        item.DepartureDate,
+            //        item.PeopleCount,
+            //        item.Number,
+            //        item.Cost,
+            //        item.ReceiptOfPayment,
+            //        item.EmployeeName
+            //    );
+            //}
 
             //add columns
             var columns = new DataGridViewColumn[]
@@ -373,5 +415,7 @@ namespace АРМ_Менеджера_гостиницы
             //{
             //   
         }
+
+
     }
 }
