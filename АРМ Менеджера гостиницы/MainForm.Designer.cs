@@ -39,13 +39,13 @@
             this.clientsUpdateDbButton = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.roomsDataGridView = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.employeesDataGridView = new System.Windows.Forms.DataGridView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.paymentsDataGridView = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -61,17 +61,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.roomsDataGridView)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.employeesDataGridView)).BeginInit();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.paymentsDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -195,20 +195,20 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.dataGridView2);
+            this.splitContainer2.Panel2.Controls.Add(this.roomsDataGridView);
             this.splitContainer2.Size = new System.Drawing.Size(781, 540);
             this.splitContainer2.SplitterDistance = 260;
             this.splitContainer2.TabIndex = 0;
             // 
-            // dataGridView2
+            // roomsDataGridView
             // 
-            this.dataGridView2.AllowUserToOrderColumns = true;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView2.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(517, 540);
-            this.dataGridView2.TabIndex = 0;
+            this.roomsDataGridView.AllowUserToOrderColumns = true;
+            this.roomsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.roomsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.roomsDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.roomsDataGridView.Name = "roomsDataGridView";
+            this.roomsDataGridView.Size = new System.Drawing.Size(517, 540);
+            this.roomsDataGridView.TabIndex = 0;
             // 
             // tabPage3
             // 
@@ -228,20 +228,20 @@
             // 
             // splitContainer3.Panel2
             // 
-            this.splitContainer3.Panel2.Controls.Add(this.dataGridView3);
+            this.splitContainer3.Panel2.Controls.Add(this.employeesDataGridView);
             this.splitContainer3.Size = new System.Drawing.Size(787, 546);
             this.splitContainer3.SplitterDistance = 262;
             this.splitContainer3.TabIndex = 0;
             // 
-            // dataGridView3
+            // employeesDataGridView
             // 
-            this.dataGridView3.AllowUserToOrderColumns = true;
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView3.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(521, 546);
-            this.dataGridView3.TabIndex = 0;
+            this.employeesDataGridView.AllowUserToOrderColumns = true;
+            this.employeesDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.employeesDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.employeesDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.employeesDataGridView.Name = "employeesDataGridView";
+            this.employeesDataGridView.Size = new System.Drawing.Size(521, 546);
+            this.employeesDataGridView.TabIndex = 0;
             // 
             // tabPage4
             // 
@@ -261,20 +261,20 @@
             // 
             // splitContainer4.Panel2
             // 
-            this.splitContainer4.Panel2.Controls.Add(this.dataGridView4);
+            this.splitContainer4.Panel2.Controls.Add(this.paymentsDataGridView);
             this.splitContainer4.Size = new System.Drawing.Size(787, 546);
             this.splitContainer4.SplitterDistance = 262;
             this.splitContainer4.TabIndex = 0;
             // 
-            // dataGridView4
+            // paymentsDataGridView
             // 
-            this.dataGridView4.AllowUserToOrderColumns = true;
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView4.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.Size = new System.Drawing.Size(521, 546);
-            this.dataGridView4.TabIndex = 0;
+            this.paymentsDataGridView.AllowUserToOrderColumns = true;
+            this.paymentsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.paymentsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.paymentsDataGridView.Location = new System.Drawing.Point(0, 0);
+            this.paymentsDataGridView.Name = "paymentsDataGridView";
+            this.paymentsDataGridView.Size = new System.Drawing.Size(521, 546);
+            this.paymentsDataGridView.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -303,17 +303,17 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.roomsDataGridView)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.employeesDataGridView)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.paymentsDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -329,13 +329,13 @@
         private System.Windows.Forms.DataGridView clientsDataGridView;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView roomsDataGridView;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.SplitContainer splitContainer3;
-        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.DataGridView employeesDataGridView;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.SplitContainer splitContainer4;
-        private System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.DataGridView paymentsDataGridView;
         private System.Windows.Forms.SplitContainer splitContainer5;
         private System.Windows.Forms.Button clientsRefreshGridButton;
         private System.Windows.Forms.Button clientsUpdateDbButton;

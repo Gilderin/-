@@ -146,6 +146,7 @@ namespace АРМ_Менеджера_гостиницы
         }
         #endregion
 
+        #region rooms
         private void LoadRoomsGrid()
         {
             var roomsGridData = _dbContext.Rooms.Select(e =>
@@ -158,10 +159,10 @@ namespace АРМ_Менеджера_гостиницы
                 Capacity = e.Capacity
 
             }).ToArray();
-            dataGridView2.DataSource = new BindingSource { DataSource = roomsGridData };
+            roomsDataGridView.DataSource = new BindingSource { DataSource = roomsGridData };
 
             //setup columns
-            dataGridView2.Columns.Clear();
+            roomsDataGridView.Columns.Clear();
             //foreach (var item in roomsGridData)
             //{
             //    dataGridView2.Rows.Add(
@@ -209,13 +210,15 @@ namespace АРМ_Менеджера_гостиницы
             };
             foreach (var item in columns)
             {
-                dataGridView2.Columns.Add(item);
+                roomsDataGridView.Columns.Add(item);
             }
-            dataGridView2.AllowUserToDeleteRows = this._userRights.RoomsRights.CanDelete;
-            dataGridView2.AllowUserToAddRows = this._userRights.RoomsRights.CanAdd;
+            roomsDataGridView.AllowUserToDeleteRows = this._userRights.RoomsRights.CanDelete;
+            roomsDataGridView.AllowUserToAddRows = this._userRights.RoomsRights.CanAdd;
 
         }
+        #endregion
 
+        #region employees
         private void LoadEmployeesGrid()
         {
 
@@ -229,10 +232,10 @@ namespace АРМ_Менеджера_гостиницы
                e.NumberPhone
 
            }).ToArray();
-            dataGridView3.DataSource = new BindingSource { DataSource = employeesGridData };
+            employeesDataGridView.DataSource = new BindingSource { DataSource = employeesGridData };
 
             //setup columns
-            dataGridView3.Columns.Clear();
+            employeesDataGridView.Columns.Clear();
             //foreach (var item in employeesGridData)
             //{
             //    dataGridView3.Rows.Add(
@@ -280,16 +283,18 @@ namespace АРМ_Менеджера_гостиницы
             };
             foreach (var item in columns)
             {
-                dataGridView3.Columns.Add(item);
+                employeesDataGridView.Columns.Add(item);
             }
 
 
-           
-            dataGridView3.AllowUserToDeleteRows = this._userRights.EmployeesRights.CanDelete;
-            dataGridView3.AllowUserToAddRows = this._userRights.EmployeesRights.CanAdd;
+
+            employeesDataGridView.AllowUserToDeleteRows = this._userRights.EmployeesRights.CanDelete;
+            employeesDataGridView.AllowUserToAddRows = this._userRights.EmployeesRights.CanAdd;
 
         }
+        #endregion
 
+        #region payments
         private void LoadPaymentGrid()
         {
             var paymentsGridData = _dbContext.Payments.Select(e =>
@@ -309,10 +314,10 @@ namespace АРМ_Менеджера_гостиницы
 
             }).ToArray();
 
-            dataGridView4.DataSource = new BindingSource { DataSource = paymentsGridData };
+            paymentsDataGridView.DataSource = new BindingSource { DataSource = paymentsGridData };
 
             //setup columns
-            dataGridView4.Columns.Clear();
+            paymentsDataGridView.Columns.Clear();
             //foreach (var item in paymentsGridData)
             //{
             //    dataGridView4.Rows.Add(
@@ -396,15 +401,18 @@ namespace АРМ_Менеджера_гостиницы
             };
             foreach (var item in columns)
             {
-                dataGridView4.Columns.Add(item);
+                paymentsDataGridView.Columns.Add(item);
             }
 
 
-            
-         dataGridView4.AllowUserToDeleteRows = this._userRights.PaymentsRigths.CanDelete;
-         dataGridView4.AllowUserToAddRows = this._userRights.PaymentsRigths.CanAdd;
+
+            paymentsDataGridView.AllowUserToDeleteRows = this._userRights.PaymentsRigths.CanDelete;
+            paymentsDataGridView.AllowUserToAddRows = this._userRights.PaymentsRigths.CanAdd;
 
         }
+        #endregion
+
+
         private void MainForm_Load(object sender, EventArgs eventArgs)
         {
             LoadClientsGrid();
