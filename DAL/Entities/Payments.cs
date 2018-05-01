@@ -12,8 +12,9 @@ namespace DAL.Entities
         public Decimal Money { get; set; }
         public DateTimeOffset ArrivalDate { get; set; }
         public DateTimeOffset DepartureDate { get; set; }
-
         public Int32 ClientId { get; set; }
+        public Int32 PeopleCount { get; set; }
+        public String ReceiptOfPayment { get; set; }
         virtual public Client Client { get; set; }
         public Int32 RoomId { get; set; }
         virtual public Room Room { get; set; }

@@ -13,9 +13,12 @@ namespace Model
             ClientsRights = new RightsModel();
             RoomsRights = new RightsModel();
             EmployeesRights = new RightsModel();
+            PaymentsRigths = new RightsModel();
         }
         public RightsModel ClientsRights { get; set; }
         public RightsModel RoomsRights { get; set; }
         public RightsModel EmployeesRights { get; set; }
+
+        public RightsModel PaymentsRigths { get; set; }
     }
 }

@@ -207,7 +207,7 @@ namespace АРМ_Менеджера_гостиницы
 
         }
 
-        private void LoadPaymentGrid() //todo: jgkgjg
+        private void LoadPaymentGrid()
         {
             //add columns
             var columns = new DataGridViewColumn[]
@@ -244,27 +244,22 @@ namespace АРМ_Менеджера_гостиницы
                 },
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
-                    Name = "Children",
-                    HeaderText = "Дети есть"
-                },
-                new DataGridViewColumn(new DataGridViewTextBoxCell())
-                {
-                    Name = "Номер комнаты",
+                    Name = "Number",
                     HeaderText = "Номер комнаты"
                 },
                  new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
-                    Name = "Общая стоимость",
-                    HeaderText = "Общая стоимость"
+                    Name = "Cost",
+                    HeaderText = "Стоимость номера"
                 },
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
-                    Name = "Оплата",
+                    Name = "ReceiptOfPayment",
                     HeaderText = "Оплата"
                 },
                   new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
-                    Name = "Общая стоимость",
+                    Name = "EmployeeSecondName",
                     HeaderText = "Сотрудник оформивший"
                 }
 
@@ -283,24 +278,32 @@ namespace АРМ_Менеджера_гостиницы
                 e.Client.SecondName,
                 e.ArrivalDate,
                 e.DepartureDate,
+                e.PeopleCount,
                 e.Room.Number,
                 e.Room.RoomType.Cost,
+                e.ReceiptOfPayment,
+                EmployeeName= e.Employee.SecondName,
 
 
             }).ToArray();
             foreach (var item in paymentsGridData)
             {
-                dataGridView3.Rows.Add(
+                dataGridView4.Rows.Add(
                     item.Id,
                     item.Name,
-                    item.SecondName
-               
-
+                    item.SecondName,
+                    item.ArrivalDate,
+                    item.DepartureDate,
+                    item.PeopleCount,
+                    item.Number,
+                    item.Cost,
+                    item.ReceiptOfPayment,
+                    item.EmployeeName
                 );
             }
 
-        //    dataGridView2.AllowUserToDeleteRows = this._userRights.EmployeesRights.CanDelete;
-          //  dataGridView2.AllowUserToAddRows = this._userRights.EmployeesRights.CanAdd;
+         dataGridView4.AllowUserToDeleteRows = this._userRights.PaymentsRigths.CanDelete;
+         dataGridView4.AllowUserToAddRows = this._userRights.PaymentsRigths.CanAdd;
 
         }
         private void MainForm_Load(object sender, EventArgs eventArgs)
@@ -308,6 +311,7 @@ namespace АРМ_Менеджера_гостиницы
             LoadClientsGrid();
             LoadRoomsGrid();
             LoadEmployeesGrid();
+            LoadPaymentGrid();
             //new DataGridViewColumn(new DataGridViewTextBoxCell())
             //{
             //   
