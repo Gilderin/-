@@ -215,6 +215,69 @@ namespace АРМ_Менеджера_гостиницы
             roomsDataGridView.AllowUserToAddRows = this._userRights.RoomsRights.CanAdd;
 
         }
+
+        private void UpdateRoomsGridDbData()
+        {
+            var dbData = _dbContext.Rooms.ToList();
+
+            //remove deleted from db
+            var toRemove = dbData
+                .Where(dbRoom => !_roomsGridData.Any(e => dbRoom.Id == e.Id))
+                .ToList();
+            _dbContext.Rooms.RemoveRange(toRemove);
+
+            //add new clients to db
+            var roomsToAdd = _roomsGridData
+                .Where(dataGridRoom => !dbData.Any(e => dataGridRoom.Id == e.Id))
+                .ToList();
+
+            var roomTypeToAdd = roomsToAdd
+                .Where(e => _dbContext.RoomTypes.Any(e1 => e1.Name == e.RoomType))
+                .Select(e => new RoomType
+                {
+                    Name = e.RoomType,
+                    Cost = e.Cost
+                });
+
+            var newRoomsToAdd = roomsToAdd.Select(e => new Room()
+            {
+                Id = e.Id,
+                Number = e.Number,
+                RoomType = roomTypeToAdd
+                    .Where(e1 => e1.Name == e.RoomType)
+                    .Single(),
+                Capacity = e.Capacity
+
+            });
+            _dbContext.Rooms.AddRange(newRoomsToAdd);
+            _dbContext.SaveChanges();
+        }
+        private void RefreshRoomsGrid()
+        {
+            _roomsGridData.Clear();
+            var data = _dbContext.Rooms.Select(e => new RoomsGridModel()
+            {
+                Id = e.Id,
+                Number = e.Number,
+                RoomType = e.RoomType.Name,
+                Cost = e.RoomType.Cost,
+                Capacity = e.Capacity
+            })
+            .ToList();
+            foreach (var item in data)
+            {
+                this._roomsGridData.Add(item);
+            }
+        }
+        private void RoomsUpdateBdButton_Click(object sender, EventArgs e)
+        {
+            UpdateRoomsGridDbData();
+        }
+
+        private void RoomsRefreshGridButton_Click(object sender, EventArgs e)
+        {
+            RefreshRoomsGrid();
+        }
         #endregion
 
         #region employees
@@ -293,6 +356,74 @@ namespace АРМ_Менеджера_гостиницы
             employeesDataGridView.AllowUserToDeleteRows = this._userRights.EmployeesRights.CanDelete;
             employeesDataGridView.AllowUserToAddRows = this._userRights.EmployeesRights.CanAdd;
 
+        }
+
+        private void UpdateEmployeesGridDbData()
+        {
+            var dbData = _dbContext.Employees.ToList();
+
+
+
+            //remove deleted from db
+            var employeesToRemove = dbData
+                .Where(dbEmployee => !_employeesGridData.Any(e => dbEmployee.Id == e.Id))
+                .ToList();
+            _dbContext.Employees.RemoveRange(employeesToRemove);
+
+            //add new clients to db
+            var employeesToAdd = _employeesGridData
+                .Where(dataGridEmployee => !dbData.Any(e => dataGridEmployee.Id == e.Id))
+                .ToList();
+
+            var positionsToAdd = employeesToAdd
+                .Select(e => e.Position)
+                .Where(e => _dbContext.Positions.Any(e1 => e1.Name == e))
+                .Select(e => new Position
+                {
+                    Name = e
+                });
+
+            var newEmployeesToAdd = employeesToAdd.Select(e => new Employee()
+            {
+                Id = e.Id,
+                Name = e.Name,
+                SecondName = e.SecondName,
+                Position = positionsToAdd
+                    .Where(e1 => e1.Name == e.Position)
+                    .Single(),
+                NumberPhone = e.NumberPhone
+                
+            });
+
+
+            _dbContext.Employees.AddRange(newEmployeesToAdd);
+            _dbContext.SaveChanges();
+        }
+        private void RefreshEmployeesGrid()
+        {
+            this._employeesGridData.Clear();
+            var data = _dbContext.Employees.Select(e => new EmployeesGridModel()
+            {
+                Id= e.Id,
+               Name= e.Name,
+              SecondName= e.SecondName,
+              Position =  e.Position.Name,
+              NumberPhone= e.NumberPhone
+            })
+            .ToList();
+            foreach (var item in data)
+            {
+                this._employeesGridData.Add(item);
+            }
+        }
+        private void EmployeesUpdateBdButton_Click(object sender, EventArgs e)
+        {
+            UpdateEmployeesGridDbData();
+        }
+
+        private void EmployeesRefreshGridButton_Click(object sender, EventArgs e)
+        {
+            RefreshEmployeesGrid();
         }
         #endregion
 
@@ -415,6 +546,7 @@ namespace АРМ_Менеджера_гостиницы
         }
         #endregion
 
+
         private void MainForm_Load(object sender, EventArgs eventArgs)
         {
             LoadRoomsGrid();
@@ -423,5 +555,7 @@ namespace АРМ_Менеджера_гостиницы
             LoadEmployeesGrid();
             LoadPaymentsGrid();
         }
+
+   
     }
 }
