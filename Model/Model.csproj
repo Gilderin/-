@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GridModels\ClientsGridModel.cs" />
+    <Compile Include="GridModels\EmployeesGridModel.cs" />
+    <Compile Include="GridModels\PaymentsGridModel.cs" />
+    <Compile Include="GridModels\RoomsGridModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RightsModel.cs" />
     <Compile Include="UserRightsModel.cs" />

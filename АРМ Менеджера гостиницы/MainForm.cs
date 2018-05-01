@@ -47,7 +47,13 @@ namespace АРМ_Менеджера_гостиницы
             var clientsBindingSource = new BindingSource(_clientsGridData, null);
             clientsDataGridView.DataSource = clientsBindingSource;
 
-            //setup columns
+            SetupClientsGridColumns();
+            clientsDataGridView.MultiSelect = false;
+            clientsDataGridView.AllowUserToDeleteRows = _userRights.ClientsRights.CanDelete;
+            clientsDataGridView.AllowUserToAddRows = _userRights.ClientsRights.CanAdd;
+        }
+        private void SetupClientsGridColumns()
+        {
             clientsDataGridView.Columns.Clear();
             var columns = new DataGridViewColumn[]
             {
@@ -90,10 +96,6 @@ namespace АРМ_Менеджера_гостиницы
             {
                 clientsDataGridView.Columns.Add(item);
             }
-
-            clientsDataGridView.MultiSelect = false;
-            clientsDataGridView.AllowUserToDeleteRows = _userRights.ClientsRights.CanDelete;
-            clientsDataGridView.AllowUserToAddRows = _userRights.ClientsRights.CanAdd;
         }
         private void UpdateClientsGridDbData()
         {
@@ -147,6 +149,7 @@ namespace АРМ_Менеджера_гостиницы
         #endregion
 
         #region rooms
+        private BindingList<RoomsGridModel> _roomsGridData;
         private void LoadRoomsGrid()
         {
             var roomsGridData = _dbContext.Rooms.Select(e =>
@@ -219,6 +222,7 @@ namespace АРМ_Менеджера_гостиницы
         #endregion
 
         #region employees
+        private BindingList<EmployeesGridModel> _employeesGridData;
         private void LoadEmployeesGrid()
         {
 
@@ -295,7 +299,8 @@ namespace АРМ_Менеджера_гостиницы
         #endregion
 
         #region payments
-        private void LoadPaymentGrid()
+        private BindingList<PaymentsGridModel> _paymentsGridData;
+        private void LoadPaymentsGrid()
         {
             var paymentsGridData = _dbContext.Payments.Select(e =>
             new
@@ -412,18 +417,12 @@ namespace АРМ_Менеджера_гостиницы
         }
         #endregion
 
-
         private void MainForm_Load(object sender, EventArgs eventArgs)
         {
             LoadClientsGrid();
             LoadRoomsGrid();
             LoadEmployeesGrid();
-            LoadPaymentGrid();
-            //new DataGridViewColumn(new DataGridViewTextBoxCell())
-            //{
-            //   
+            LoadPaymentsGrid();
         }
-
-
     }
 }
