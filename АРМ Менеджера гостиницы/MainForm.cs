@@ -417,8 +417,9 @@ namespace АРМ_Менеджера_гостиницы
 
         private void MainForm_Load(object sender, EventArgs eventArgs)
         {
-            LoadClientsGrid();
             LoadRoomsGrid();
+            LoadClientsGrid();
+            
             LoadEmployeesGrid();
             LoadPaymentsGrid();
         }
