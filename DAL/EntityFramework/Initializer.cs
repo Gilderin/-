@@ -79,14 +79,14 @@ namespace DAL.EntityFramework
                 {
                     Name = "Andrey",
                     SecondName= "Cheroshey",
-                    PasportNumber = "1231241245125",
+                    PassportNumber = "1231241245125",
                     DateOfBirth = new DateTimeOffset()
                 },
                 new Client()
                 {
                     Name = "Egor",
                     SecondName= "Vasilev",
-                    PasportNumber = "2343242434",
+                    PassportNumber = "2343242434",
                     DateOfBirth = new DateTimeOffset()
                 }
             };

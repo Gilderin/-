@@ -1,6 +1,7 @@
 ﻿using DAL.Entities;
 using DAL.EntityFramework;
 using Model;
+using Model.GridModels;
 using Services;
 using System;
 using System.Collections.Generic;
@@ -28,22 +29,21 @@ namespace АРМ_Менеджера_гостиницы
         }
 
         #region clients
-        private BindingSource _clientsBindingSource = new BindingSource();
+        private List<ClientsGridModel> _clientsGridData;
         private void LoadClientsGrid()
         {
             //load data
-            var clientGridData = _dbContext.Clients
-                .Select(e => new
+            _clientsGridData = _dbContext.Clients
+                .Select(e => new ClientsGridModel()
                 {
-                    e.Id,
-                    e.Name,
-                    e.SecondName,
-                    e.PasportNumber,
-                    e.DateOfBirth
+                    Id = e.Id,
+                    Name = e.Name,
+                    SecondName = e.SecondName,
+                    PassportNumber = e.PassportNumber,
+                    DateOfBirth = e.DateOfBirth
                 })
                 .ToList();
-            _clientsBindingSource.DataSource = clientGridData;
-            dataGridView1.DataSource = this._clientsBindingSource;
+            dataGridView1.DataSource = new BindingSource() { DataSource = _clientsGridData };
 
             //setup columns
             dataGridView1.Columns.Clear();
@@ -79,8 +79,8 @@ namespace АРМ_Менеджера_гостиницы
                 },
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
-                    Name ="PasportNumber",
-                    DataPropertyName ="PasportNumber",
+                    Name ="PassportNumber",
+                    DataPropertyName ="PassportNumber",
                     HeaderText = "Номер паспорта"
                 }
             };
@@ -94,6 +94,10 @@ namespace АРМ_Менеджера_гостиницы
             dataGridView1.AllowUserToAddRows = _userRights.ClientsRights.CanAdd;
         }
         private void UpdateClientsGrid()
+        {
+
+        }
+        private void RefreshClientsGrid()
         {
 
         }
