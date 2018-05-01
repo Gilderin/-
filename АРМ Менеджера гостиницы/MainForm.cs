@@ -54,15 +54,16 @@ namespace АРМ_Менеджера_гостиницы
         }
         private void SetupClientsGridColumns()
         {
+            clientsDataGridView.AutoGenerateColumns = false;
             clientsDataGridView.Columns.Clear();
             var columns = new DataGridViewColumn[]
             {
-                new DataGridViewColumn(new DataGridViewTextBoxCell())
-                {
-                    Name = "IdColumn",
-                    DataPropertyName = "Id",
-                    HeaderText = "Id"
-                },
+                //new DataGridViewColumn(new DataGridViewTextBoxCell())
+                //{
+                //    Name = "IdColumn",
+                //    DataPropertyName = "Id",
+                //    HeaderText = "Id"
+                //},
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
                     Name = "Name",
@@ -150,57 +151,33 @@ namespace АРМ_Менеджера_гостиницы
 
         #region rooms
         private BindingList<RoomsGridModel> _roomsGridData;
-        private void LoadRoomsGrid()
+        private void SetupRoomsGridColumns()
         {
-            var roomsGridData = _dbContext.Rooms.Select(e =>
-            new
-            {
-                e.Id,
-                e.Number,
-                Name = e.RoomType.Name,
-                e.RoomType.Cost,
-                Capacity = e.Capacity
-
-            }).ToArray();
-            roomsDataGridView.DataSource = new BindingSource { DataSource = roomsGridData };
-
-            //setup columns
+            roomsDataGridView.AutoGenerateColumns = false;
             roomsDataGridView.Columns.Clear();
-            //foreach (var item in roomsGridData)
-            //{
-            //    dataGridView2.Rows.Add(
-            //        item.Id,
-            //        item.Number,
-            //        item.Name,
-            //        item.Cost,
-            //        item.Capacity
-
-            //    );
-            //}
-            //add columns
             var columns = new DataGridViewColumn[]
             {
-                new DataGridViewColumn(new DataGridViewTextBoxCell())
-                {
-                    Name ="Id",
-                    DataPropertyName = "Id",
-                    HeaderText = "Id"
-                },
+                //new DataGridViewColumn(new DataGridViewTextBoxCell())
+                //{
+                //    Name ="Id",
+                //    DataPropertyName = "Id",
+                //    HeaderText = "Id"
+                //},
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
                     Name ="Number",
-                    DataPropertyName = "Nunmer",
+                    DataPropertyName = "Number",
                     HeaderText = "Номер комнаты"
                 },
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
                     Name ="RoomType",
-                    DataPropertyName = "Name",
+                    DataPropertyName = "RoomType",
                     HeaderText = "Тип комнаты"
                 },
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
-                    Name ="Price",
+                    Name ="Cost",
                     DataPropertyName = "Cost",
                     HeaderText = "Стоимость за сутки"
                 },
@@ -215,6 +192,25 @@ namespace АРМ_Менеджера_гостиницы
             {
                 roomsDataGridView.Columns.Add(item);
             }
+        }
+        private void LoadRoomsGrid()
+        {
+            //load grid data
+            var roomsGridData = _dbContext.Rooms.Select(e =>
+            new RoomsGridModel()
+            {
+                Id = e.Id,
+                Number = e.Number,
+                RoomType = e.RoomType.Name,
+                Cost = e.RoomType.Cost,
+                Capacity = e.Capacity
+
+            }).ToArray();
+            _roomsGridData = new BindingList<RoomsGridModel>(roomsGridData);
+            var roomsBindingSource = new BindingSource(_roomsGridData, null);
+            roomsDataGridView.DataSource = roomsBindingSource;
+
+            SetupRoomsGridColumns();
             roomsDataGridView.AllowUserToDeleteRows = this._userRights.RoomsRights.CanDelete;
             roomsDataGridView.AllowUserToAddRows = this._userRights.RoomsRights.CanAdd;
 
@@ -239,6 +235,7 @@ namespace АРМ_Менеджера_гостиницы
             employeesDataGridView.DataSource = new BindingSource { DataSource = employeesGridData };
 
             //setup columns
+            employeesDataGridView.AutoGenerateColumns = false;
             employeesDataGridView.Columns.Clear();
             //foreach (var item in employeesGridData)
             //{
@@ -252,6 +249,7 @@ namespace АРМ_Менеджера_гостиницы
             //    );
             //}
             //add columns
+
             var columns = new DataGridViewColumn[]
             {
                 new DataGridViewColumn(new DataGridViewTextBoxCell())

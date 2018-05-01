@@ -123,7 +123,7 @@ namespace DAL.EntityFramework
             {
                 new Room()
                 {
-                    Number = "1",
+                    Number = 1,
                     Status="Занята",
                     RoomTypeId = (Int32)RoomTypes.Lux,
                     Capacity = 2
@@ -131,7 +131,7 @@ namespace DAL.EntityFramework
                 },
                 new Room()
                 {
-                    Number = "2",
+                    Number = 2,
                     Status="Занята",
                     RoomTypeId = (Int32)RoomTypes.OneSleep,
                     Capacity = 3 

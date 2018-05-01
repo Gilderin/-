@@ -9,7 +9,7 @@ namespace DAL.Entities
     public class Room
     {
         public Int32 Id { get; set; }
-        public String Number { get; set; }
+        public Int32 Number { get; set; }
         public String Status { get; set; }
         public Int32 Capacity { get; set; }
 
