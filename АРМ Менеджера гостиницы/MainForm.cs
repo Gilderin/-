@@ -120,17 +120,7 @@ namespace АРМ_Менеджера_гостиницы
 
             //setup columns
             dataGridView2.Columns.Clear();
-            foreach (var item in roomsGridData)
-            {
-                dataGridView2.Rows.Add(
-                    item.Id,
-                    item.Number,
-                    item.Name,
-                    item.Cost,
-                    item.Capacity
-
-                );
-            }
+          
             //add columns
             var columns = new DataGridViewColumn[]
             {
@@ -191,17 +181,7 @@ namespace АРМ_Менеджера_гостиницы
 
             //setup columns
             dataGridView3.Columns.Clear();
-            foreach (var item in employeesGridData)
-            {
-                dataGridView3.Rows.Add(
-                    item.Id,
-                    item.Name,
-                    item.SecondName,
-                    item.Position,
-                    item.NumberPhone
-
-                );
-            }
+           
             //add columns
             var columns = new DataGridViewColumn[]
             {
@@ -271,21 +251,7 @@ namespace АРМ_Менеджера_гостиницы
 
             //setup columns
             dataGridView4.Columns.Clear();
-            foreach (var item in paymentsGridData)
-            {
-                dataGridView4.Rows.Add(
-                    item.Id,
-                    item.Name,
-                    item.SecondName,
-                    item.ArrivalDate,
-                    item.DepartureDate,
-                    item.PeopleCount,
-                    item.Number,
-                    item.Cost,
-                    item.ReceiptOfPayment,
-                    item.EmployeeName
-                );
-            }
+           
 
             //add columns
             var columns = new DataGridViewColumn[]
