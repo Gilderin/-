@@ -1,4 +1,5 @@
-﻿using DAL.EntityFramework;
+﻿using DAL.Entities;
+using DAL.EntityFramework;
 using Model;
 using Services;
 using System;
@@ -26,34 +27,60 @@ namespace АРМ_Менеджера_гостиницы
             InitializeComponent();
         }
 
+        #region clients
+        private BindingSource _clientsBindingSource = new BindingSource();
         private void LoadClientsGrid()
         {
-            //add columns
+            //load data
+            var clientGridData = _dbContext.Clients
+                .Select(e => new
+                {
+                    e.Id,
+                    e.Name,
+                    e.SecondName,
+                    e.PasportNumber,
+                    e.DateOfBirth
+                })
+                .ToList();
+            _clientsBindingSource.DataSource = clientGridData;
+            dataGridView1.DataSource = this._clientsBindingSource;
+
+            //setup columns
+            dataGridView1.Columns.Clear();
             var columns = new DataGridViewColumn[]
             {
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
-                    Name ="Id",
+                    Name = "IdColumn",
+                    DataPropertyName = "Id",
                     HeaderText = "Id"
                 },
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
-                    Name ="Name",
-                    HeaderText = "Имя"
+                    Name = "Name",
+                    DataPropertyName = "Name",
+                    HeaderText = "Имя",
                 },
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
-                    Name ="SecondName",
+                    Name = "SecondName",
+                    DataPropertyName ="SecondName",
                     HeaderText = "Фамилия"
                 },
-                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                new DataGridViewColumn(new DataGridViewTextBoxCell()
+                    {
+                        Style = new DataGridViewCellStyle(){ Format = "dd/MM/yyyy" }
+                    })
                 {
-                    Name ="DateOfBirth",
-                    HeaderText = "Дата рождения"
+                    Name = "DateOfBirth",
+                    DataPropertyName ="DateOfBirth",
+                    HeaderText = "Дата рождения",
+
                 },
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
                 {
                     Name ="PasportNumber",
+                    DataPropertyName ="PasportNumber",
                     HeaderText = "Номер паспорта"
                 }
             };
@@ -62,23 +89,17 @@ namespace АРМ_Менеджера_гостиницы
                 dataGridView1.Columns.Add(item);
             }
 
-            //load data
-            var clientGridData = _dbContext.Clients.ToArray();
-            foreach (var item in clientGridData)
-            {
-                dataGridView1.Rows.Add(
-                    item.Id, item.Name,
-                    item.SecondName,
-                    item.DateOfBirth,
-                    item.PasportNumber
-                );
-            }
-
+            dataGridView1.MultiSelect = false;
             dataGridView1.AllowUserToDeleteRows = _userRights.ClientsRights.CanDelete;
             dataGridView1.AllowUserToAddRows = _userRights.ClientsRights.CanAdd;
         }
+        private void UpdateClientsGrid()
+        {
 
-        
+        }
+        #endregion
+
+
         private void LoadRoomsGrid()
         {
             //add columns
@@ -138,8 +159,8 @@ namespace АРМ_Менеджера_гостиницы
                 );
             }
 
-            dataGridView2.AllowUserToDeleteRows = this._userRights.RoomsRights.CanDelete;
-            dataGridView2.AllowUserToAddRows = this._userRights.RoomsRights.CanAdd;
+            dataGridView2.AllowUserToDeleteRows = true;
+            dataGridView2.AllowUserToAddRows = true;
 
         }
 
