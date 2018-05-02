@@ -12,14 +12,17 @@ namespace DAL.Entities
         public Decimal Money { get; set; }
         public DateTimeOffset ArrivalDate { get; set; }
         public DateTimeOffset DepartureDate { get; set; }
-        public Int32 ClientId { get; set; }
         public Int32 PeopleCount { get; set; }
         public String ReceiptOfPayment { get; set; }
-        virtual public Client Client { get; set; }
+
+        public Int32 ClientId { get; set; }
+        public virtual Client Client { get; set; }
         public Int32 RoomId { get; set; }
-        virtual public Room Room { get; set; }
+        public virtual Room Room { get; set; }
         public Int32 EmployeeId { get; set; }
-        virtual public Employee Employee { get; set; }
+        public virtual Employee Employee { get; set; }
+        public ICollection<Service> Services { get; set; }
+        public ICollection<RoomService> RoomServices { get; set; }
 
     }
 }

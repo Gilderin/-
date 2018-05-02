@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class RoomType
+    public class ServiceType
     {
         public Int32 Id { get; set; }
         public String Name { get; set; }
-        public Decimal Cost { get; set; }
 
-        virtual public ICollection<Room> Rooms { get; set; }
+        public virtual ICollection<Service> Services { get; set; }
     }
 }

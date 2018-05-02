@@ -14,8 +14,9 @@ namespace DAL.Entities
         public String SecondName { get; set; }
 
         public String NumberPhone { get; set; }
-        virtual public Position Position { get; set; }
+        public virtual Position Position { get; set; }
         public Int32 ActorId { get; set; }
-        virtual public Actor Actor { get; set; }
+        public virtual Actor Actor { get; set; }
+        public virtual ICollection<RoomService> RoomServices { get; set; }
     }
 }
