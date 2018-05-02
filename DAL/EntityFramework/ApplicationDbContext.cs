@@ -11,15 +11,20 @@ using System.Threading.Tasks;
 namespace DAL.EntityFramework
 {
     public class ApplicationDbContext : DbContext
-    { 
+    {
 
-
-        public DbSet<Employee> Employees { get; set; }
-        public DbSet<Position> Positions { get; set; }
         public DbSet<Client> Clients { get; set; }
-        public DbSet<Room> Rooms { get; set; }
+        public DbSet<Complaint> Complaints { get; set; }
+        public DbSet<ComplaintCategory> ComplaintCategories { get; set; }
+        public DbSet<ComplaintCategoryJoin> ComplaintCategoryJoins { get; set; }
+        public DbSet<Employee> Employees { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<Position> Positions { get; set; }
+        public DbSet<Room> Rooms { get; set; }
         public DbSet<RoomType> RoomTypes { get; set; }
+        public DbSet<RoomService> RoomServices { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<ServiceType> ServiceTypes { get; set; }
 
         #region auth
         public DbSet<Role> Roles { get; set; } 
@@ -37,10 +42,42 @@ namespace DAL.EntityFramework
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Actor>()
+            base.OnModelCreating(modelBuilder);
+
+            //configure one-to-one
+            var actorBuilder = modelBuilder.Entity<Actor>();
+            actorBuilder
                 .HasRequired(e => e.Employee)
                 .WithRequiredPrincipal(e => e.Actor);
+           
+            //configure many-to-many
+            var complaintCategoryJoinBuilder = modelBuilder
+                .Entity<ComplaintCategoryJoin>();
+            complaintCategoryJoinBuilder
+                .HasRequired(e => e.Complaint)
+                .WithMany(e => e.ComplaintCategotyJoins)
+                .HasForeignKey(e => e.ComplaintId);
+            complaintCategoryJoinBuilder
+                .HasRequired(e => e.ComplaintCategory)
+                .WithMany(e => e.ComplaintCategotyJoins)
+                .HasForeignKey(e => e.ComplaintCategoryId);
+            complaintCategoryJoinBuilder
+                .HasKey(e => new { e.ComplaintCategoryId, e.ComplaintId });
+
+            // configure cascade delete
+            var roomServiceBuilder = modelBuilder
+                .Entity<RoomService>();
+            roomServiceBuilder
+                .HasRequired(e => e.Payment)
+                .WithMany(e => e.RoomServices)
+                .HasForeignKey(e => e.PaymentId)
+                .WillCascadeOnDelete(false);
+            roomServiceBuilder.
+                HasRequired(e => e.Employee)
+                .WithMany(e => e.RoomServices)
+                .HasForeignKey(e => e.EmployeeId)
+                .WillCascadeOnDelete(true);
+
         }
 
         private static string GetConnectionString()
