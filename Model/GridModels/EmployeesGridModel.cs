@@ -12,6 +12,6 @@ namespace Model.GridModels
         public String Name { get; set; }
         public String SecondName { get; set; }
         public String Position { get; set; }
-        public String NumberPhone { get; set; }
+        public String PhoneNumber { get; set; }
     }
 }

@@ -8,9 +8,8 @@ namespace Model
 {
     public class RightsModel
     {
-        public Boolean CanDelete { get; set; }
         public Boolean CanAdd { get; set; }
-        public Boolean CanEdit { get; set; }
+        public Boolean CanDelete { get; set; }
         public Boolean CanRead { get; set; }
     }
 }

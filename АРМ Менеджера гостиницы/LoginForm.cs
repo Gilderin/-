@@ -1,13 +1,5 @@
-﻿using DAL.EntityFramework;
-using Services;
+﻿using Entity.Service;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace АРМ_Менеджера_гостиницы
@@ -23,34 +15,16 @@ namespace АРМ_Менеджера_гостиницы
         {
             var login = Login.Text;
             var password = Password.Text;
-            var context = new ApplicationDbContext();
-            var encryptedPassword = context.Actors
-                .Where(e => e.Login == login)
-                .Select(e => e.Password)
-                .SingleOrDefault();
-            if (encryptedPassword != null)
+            try
             {
-                var verified = EncryptionService.Verify(password, encryptedPassword);
-                if (verified)
-                {
-                    //var identity = IdentityService.ClaimIdentity();
-                    //var config = GetFormAccessibilityConfig(identity);
-                    //Запрос в базу какие права, и передавать из в вторую форму, при инициализации просто прописывать, какие из 
-                    // лэйблов или чего не будет
-
-                    MainForm f = new MainForm();
-                    f.Show();
-                    return;
-                }
-                MessageBox.Show("Wrong Password");
-                return;
+                IdentityService.ClaimIdentity(login, password);
+                MainForm f = new MainForm();
+                f.Show();
             }
-            MessageBox.Show("Wrong Login");
-        }
-
-        private object GetFormAccessibilityConfig(object identity)
-        {
-            throw new NotImplementedException();
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

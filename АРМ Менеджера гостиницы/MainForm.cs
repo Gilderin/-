@@ -1,8 +1,9 @@
-﻿using DAL.Entities;
-using DAL.EntityFramework;
+﻿using Entity.Entities;
+using Entity.EntityFramework;
+using Entity.Enums;
+using Entity.Service;
 using Model;
 using Model.GridModels;
-using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,12 +19,12 @@ namespace АРМ_Менеджера_гостиницы
     public partial class MainForm : Form
     {
 
-        private UserRightsModel _userRights;
+        private Dictionary<String, RightsModel> _userPermissions;
         private ApplicationDbContext _dbContext;
 
         public MainForm()
         {
-            this._userRights = RightsService.GetUserRights();
+            this._userPermissions = IdentityService.GetPermissions();
             this._dbContext = new ApplicationDbContext();
             InitializeComponent();
         }
@@ -32,25 +33,28 @@ namespace АРМ_Менеджера_гостиницы
         private BindingList<ClientsGridModel> _clientsGridData;
         private void LoadClientsGrid()
         {
-            //load data
+            SetupClientsDataSource();
+            SetupClientsGridColumns();
+            clientsDataGridView.MultiSelect = false;
+            String clientsAdminUnit = AdminUnitType.Clients.ToString();
+            clientsDataGridView.AllowUserToDeleteRows = _userPermissions[clientsAdminUnit].CanDelete;
+            clientsDataGridView.AllowUserToAddRows = _userPermissions[clientsAdminUnit].CanAdd;
+        }
+        private void SetupClientsDataSource()
+        {
             var clientsGridData = _dbContext.Clients
-                .Select(e => new ClientsGridModel()
-                {
-                    Id = e.Id,
-                    Name = e.Name,
-                    SecondName = e.SecondName,
-                    PassportNumber = e.PassportNumber,
-                    DateOfBirth = e.DateOfBirth
-                })
-                .ToList();
+                    .Select(e => new ClientsGridModel()
+                    {
+                        Id = e.Id,
+                        Name = e.Name,
+                        SecondName = e.SecondName,
+                        PassportNumber = e.PassportNumber,
+                        DateOfBirth = e.DateOfBirth
+                    })
+                    .ToList();
             _clientsGridData = new BindingList<ClientsGridModel>(clientsGridData);
             var clientsBindingSource = new BindingSource(_clientsGridData, null);
             clientsDataGridView.DataSource = clientsBindingSource;
-
-            SetupClientsGridColumns();
-            clientsDataGridView.MultiSelect = false;
-            clientsDataGridView.AllowUserToDeleteRows = _userRights.ClientsRights.CanDelete;
-            clientsDataGridView.AllowUserToAddRows = _userRights.ClientsRights.CanAdd;
         }
         private void SetupClientsGridColumns()
         {
@@ -193,9 +197,8 @@ namespace АРМ_Менеджера_гостиницы
                 roomsDataGridView.Columns.Add(item);
             }
         }
-        private void LoadRoomsGrid()
+        private void SetupRoomsDataSource()
         {
-            //load grid data
             var roomsGridData = _dbContext.Rooms.Select(e =>
             new RoomsGridModel()
             {
@@ -209,13 +212,15 @@ namespace АРМ_Менеджера_гостиницы
             _roomsGridData = new BindingList<RoomsGridModel>(roomsGridData);
             var roomsBindingSource = new BindingSource(_roomsGridData, null);
             roomsDataGridView.DataSource = roomsBindingSource;
-
-            SetupRoomsGridColumns();
-            roomsDataGridView.AllowUserToDeleteRows = this._userRights.RoomsRights.CanDelete;
-            roomsDataGridView.AllowUserToAddRows = this._userRights.RoomsRights.CanAdd;
-
         }
-
+        private void LoadRoomsGrid()
+        {
+            SetupRoomsDataSource();
+            SetupRoomsGridColumns();
+            String clientsPermissionType = AdminUnitType.Clients.ToString();
+            roomsDataGridView.AllowUserToDeleteRows = this._userPermissions[clientsPermissionType].CanDelete;
+            roomsDataGridView.AllowUserToAddRows = this._userPermissions[clientsPermissionType].CanAdd;
+        }
         private void UpdateRoomsGridDbData()
         {
             var dbData = _dbContext.Rooms.ToList();
@@ -273,7 +278,6 @@ namespace АРМ_Менеджера_гостиницы
         {
             UpdateRoomsGridDbData();
         }
-
         private void RoomsRefreshGridButton_Click(object sender, EventArgs e)
         {
             RefreshRoomsGrid();
@@ -282,36 +286,11 @@ namespace АРМ_Менеджера_гостиницы
 
         #region employees
         private BindingList<EmployeesGridModel> _employeesGridData;
-        private void LoadEmployeesGrid()
+        private void SetupEmployeesGridColumns()
         {
-
-            var employeesGridData = _dbContext.Employees.Select(e =>
-           new
-           {
-               e.Id,
-               e.Name,
-               e.SecondName,
-               e.Position,
-               e.NumberPhone
-
-           }).ToArray();
-            employeesDataGridView.DataSource = new BindingSource { DataSource = employeesGridData };
-
             //setup columns
             employeesDataGridView.AutoGenerateColumns = false;
             employeesDataGridView.Columns.Clear();
-            //foreach (var item in employeesGridData)
-            //{
-            //    dataGridView3.Rows.Add(
-            //        item.Id,
-            //        item.Name,
-            //        item.SecondName,
-            //        item.Position,
-            //        item.NumberPhone
-
-            //    );
-            //}
-            //add columns
 
             var columns = new DataGridViewColumn[]
             {
@@ -350,19 +329,32 @@ namespace АРМ_Менеджера_гостиницы
             {
                 employeesDataGridView.Columns.Add(item);
             }
-
-
-
-            employeesDataGridView.AllowUserToDeleteRows = this._userRights.EmployeesRights.CanDelete;
-            employeesDataGridView.AllowUserToAddRows = this._userRights.EmployeesRights.CanAdd;
-
         }
-
+        private void SetupEmployeesDataSource()
+        {
+            var employeesGridData = _dbContext.Employees.Select(e => new EmployeesGridModel()
+            {
+                Id = e.Id,
+                Name = e.Name,
+                SecondName = e.SecondName,
+                Position = e.Position.Name,
+                PhoneNumber = e.NumberPhone
+            }).ToArray();
+            _employeesGridData = new BindingList<EmployeesGridModel>(employeesGridData);
+            var employeesBindingSource = new BindingSource(_employeesGridData, null);
+            employeesDataGridView.DataSource = employeesBindingSource;
+        }
+        private void LoadEmployeesGrid()
+        {
+            SetupEmployeesDataSource();
+            SetupEmployeesGridColumns();
+            String employeesAdminUnit = AdminUnitType.Employees.ToString();
+            employeesDataGridView.AllowUserToDeleteRows = this._userPermissions[employeesAdminUnit].CanDelete;
+            employeesDataGridView.AllowUserToAddRows = this._userPermissions[employeesAdminUnit].CanAdd;
+        }
         private void UpdateEmployeesGridDbData()
         {
             var dbData = _dbContext.Employees.ToList();
-
-
 
             //remove deleted from db
             var employeesToRemove = dbData
@@ -391,8 +383,7 @@ namespace АРМ_Менеджера_гостиницы
                 Position = positionsToAdd
                     .Where(e1 => e1.Name == e.Position)
                     .Single(),
-                NumberPhone = e.NumberPhone
-                
+                NumberPhone = e.PhoneNumber
             });
 
 
@@ -404,11 +395,11 @@ namespace АРМ_Менеджера_гостиницы
             this._employeesGridData.Clear();
             var data = _dbContext.Employees.Select(e => new EmployeesGridModel()
             {
-                Id= e.Id,
-               Name= e.Name,
-              SecondName= e.SecondName,
-              Position =  e.Position.Name,
-              NumberPhone= e.NumberPhone
+                Id = e.Id,
+                Name = e.Name,
+                SecondName = e.SecondName,
+                Position = e.Position.Name,
+                PhoneNumber = e.NumberPhone
             })
             .ToList();
             foreach (var item in data)
@@ -420,7 +411,6 @@ namespace АРМ_Менеджера_гостиницы
         {
             UpdateEmployeesGridDbData();
         }
-
         private void EmployeesRefreshGridButton_Click(object sender, EventArgs e)
         {
             RefreshEmployeesGrid();
@@ -452,23 +442,6 @@ namespace АРМ_Менеджера_гостиницы
 
             //setup columns
             paymentsDataGridView.Columns.Clear();
-            //foreach (var item in paymentsGridData)
-            //{
-            //    dataGridView4.Rows.Add(
-            //        item.Id,
-            //        item.Name,
-            //        item.SecondName,
-            //        item.ArrivalDate,
-            //        item.DepartureDate,
-            //        item.PeopleCount,
-            //        item.Number,
-            //        item.Cost,
-            //        item.ReceiptOfPayment,
-            //        item.EmployeeName
-            //    );
-            //}
-
-            //add columns
             var columns = new DataGridViewColumn[]
             {
                 new DataGridViewColumn(new DataGridViewTextBoxCell())
@@ -538,24 +511,18 @@ namespace АРМ_Менеджера_гостиницы
                 paymentsDataGridView.Columns.Add(item);
             }
 
-
-
-            paymentsDataGridView.AllowUserToDeleteRows = this._userRights.PaymentsRigths.CanDelete;
-            paymentsDataGridView.AllowUserToAddRows = this._userRights.PaymentsRigths.CanAdd;
-
+            String paymentsAdminUnit = AdminUnitType.Payments.ToString();
+            paymentsDataGridView.AllowUserToDeleteRows = this._userPermissions[paymentsAdminUnit].CanDelete;
+            paymentsDataGridView.AllowUserToAddRows = this._userPermissions[paymentsAdminUnit].CanAdd;
         }
         #endregion
-
 
         private void MainForm_Load(object sender, EventArgs eventArgs)
         {
             LoadRoomsGrid();
             LoadClientsGrid();
-            
             LoadEmployeesGrid();
             LoadPaymentsGrid();
         }
-
-   
     }
 }

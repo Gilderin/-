@@ -101,17 +101,25 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DAL\DAL.csproj">
+    <ProjectReference Include="..\DAL\Entity.csproj">
       <Project>{5c2aeda4-a285-4383-ad6a-2ceb11a3516f}</Project>
-      <Name>DAL</Name>
+      <Name>Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Entity.Service\Entity.Service.csproj">
+      <Project>{cb73f387-d0bd-4b1b-8908-56668514be8e}</Project>
+      <Name>Entity.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EntityFramework\Entity.EntityFramework.csproj">
+      <Project>{f709c67b-654a-45e5-ab5c-f76e5edb1c07}</Project>
+      <Name>Entity.EntityFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{7d8ed4e0-956a-46c6-b89e-c1f9c4e0073e}</Project>
       <Name>Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Services\Services.csproj">
+    <ProjectReference Include="..\Services\Service.csproj">
       <Project>{a5740a3d-2c39-484a-816b-44a84bd7a043}</Project>
-      <Name>Services</Name>
+      <Name>Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

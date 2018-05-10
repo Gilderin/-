@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DAL.EntityFramework;
-using DAL.Entities;
+using Entity.EntityFramework;
+using Entity.Entities;
 
 namespace АРМ_Менеджера_гостиницы
 {

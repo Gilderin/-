@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5C2AEDA4-A285-4383-AD6A-2CEB11A3516F}</ProjectGuid>
+    <ProjectGuid>{A5740A3D-2C39-484A-816B-44A84BD7A043}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DAL</RootNamespace>
-    <AssemblyName>DAL</AssemblyName>
+    <RootNamespace>Services</RootNamespace>
+    <AssemblyName>Services</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -34,17 +34,9 @@
       <HintPath>..\packages\BCrypt-Official.0.1.109\lib\BCrypt.Net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,42 +45,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Auth\Actor.cs" />
-    <Compile Include="Entities\Auth\AdminUnit.cs" />
-    <Compile Include="Entities\Auth\Permission.cs" />
-    <Compile Include="Entities\Auth\PermissionType.cs" />
-    <Compile Include="Entities\Auth\Role.cs" />
-    <Compile Include="Entities\Client.cs" />
-    <Compile Include="Entities\Complaint.cs" />
-    <Compile Include="Entities\ComplaintCategory.cs" />
-    <Compile Include="Entities\ComplaintCategoryJoin.cs" />
-    <Compile Include="Entities\Employee.cs" />
-    <Compile Include="Entities\Payment.cs" />
-    <Compile Include="Entities\Position.cs" />
-    <Compile Include="Entities\Room.cs" />
-    <Compile Include="Entities\Service.cs" />
-    <Compile Include="Entities\RoomService.cs" />
-    <Compile Include="Entities\RoomType.cs" />
-    <Compile Include="Entities\ServiceType.cs" />
-    <Compile Include="EntityFramework\ApplicationDbContext.cs" />
-    <Compile Include="EntityFramework\Initializer.cs" />
-    <Compile Include="Enums\PermissionTypes.cs" />
-    <Compile Include="Enums\RoomType.cs" />
+    <Compile Include="EncryptionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="LICENSE.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Services\Services.csproj">
-      <Project>{a5740a3d-2c39-484a-816b-44a84bd7a043}</Project>
-      <Name>Services</Name>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{7d8ed4e0-956a-46c6-b89e-c1f9c4e0073e}</Project>
+      <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

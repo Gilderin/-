@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A5740A3D-2C39-484A-816B-44A84BD7A043}</ProjectGuid>
+    <ProjectGuid>{5C2AEDA4-A285-4383-AD6A-2CEB11A3516F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Services</RootNamespace>
-    <AssemblyName>Services</AssemblyName>
+    <RootNamespace>DAL</RootNamespace>
+    <AssemblyName>DAL</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,11 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BCrypt.Net, Version=0.1.5073.29922, Culture=neutral, PublicKeyToken=6bcd409ee6bc9292, processorArchitecture=MSIL">
-      <HintPath>..\packages\BCrypt-Official.0.1.109\lib\BCrypt.Net.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,22 +41,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RightsService.cs" />
-    <Compile Include="EncryptionService.cs" />
-    <Compile Include="IdentityService.cs" />
+    <Compile Include="Entities\Auth\Actor.cs" />
+    <Compile Include="Entities\Auth\AdminUnit.cs" />
+    <Compile Include="Entities\Auth\Permission.cs" />
+    <Compile Include="Entities\Auth\PermissionType.cs" />
+    <Compile Include="Entities\Auth\Role.cs" />
+    <Compile Include="Entities\Client.cs" />
+    <Compile Include="Entities\Complaint.cs" />
+    <Compile Include="Entities\ComplaintCategory.cs" />
+    <Compile Include="Entities\ComplaintCategoryJoin.cs" />
+    <Compile Include="Entities\Employee.cs" />
+    <Compile Include="Entities\Payment.cs" />
+    <Compile Include="Entities\Position.cs" />
+    <Compile Include="Entities\Room.cs" />
+    <Compile Include="Entities\Service.cs" />
+    <Compile Include="Entities\RoomService.cs" />
+    <Compile Include="Entities\RoomType.cs" />
+    <Compile Include="Entities\ServiceType.cs" />
+    <Compile Include="Enums\AdminUnitType.cs" />
+    <Compile Include="Enums\PermissionTypes.cs" />
+    <Compile Include="Enums\RoomType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="LICENSE.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Model\Model.csproj">
-      <Project>{7d8ed4e0-956a-46c6-b89e-c1f9c4e0073e}</Project>
-      <Name>Model</Name>
-    </ProjectReference>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

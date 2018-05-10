@@ -1,11 +1,6 @@
 ﻿using Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Services
+namespace Entity.Service
 {
     public static class RightsService
     {
@@ -15,9 +10,8 @@ namespace Services
             rights.ClientsRights = new RightsModel()
             {
                 CanRead = true,
-                CanEdit = true,
                 CanAdd = true,
-                CanDelete = true
+                CanDelete  = true
             }; //mock
 
             return rights;

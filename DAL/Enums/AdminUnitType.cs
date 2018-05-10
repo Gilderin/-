@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Entity.Enums
 {
-    public enum PermissionTypes
+    public enum AdminUnitType
     {
-        Read = 1,
-        Add = 2,
-        Delete = 3
+        Clients = 1,
+        Rooms = 2,
+        Payments = 3,
+        Employees = 4
     }
 }

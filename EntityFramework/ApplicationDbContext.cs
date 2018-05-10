@@ -1,5 +1,5 @@
-﻿using DAL.Entities;
-using DAL.Entities.Auth;
+﻿using Entity.Entities;
+using Entity.Entities.Auth;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.EntityFramework
+namespace Entity.EntityFramework
 {
     public class ApplicationDbContext : DbContext
     {
@@ -23,7 +23,7 @@ namespace DAL.EntityFramework
         public DbSet<Room> Rooms { get; set; }
         public DbSet<RoomType> RoomTypes { get; set; }
         public DbSet<RoomService> RoomServices { get; set; }
-        public DbSet<Service> Services { get; set; }
+        public DbSet<Entities.Service> Services { get; set; }
         public DbSet<ServiceType> ServiceTypes { get; set; }
 
         #region auth
@@ -49,6 +49,10 @@ namespace DAL.EntityFramework
             actorBuilder
                 .HasRequired(e => e.Employee)
                 .WithRequiredPrincipal(e => e.Actor);
+            actorBuilder
+                .HasRequired(e => e.Role)
+                .WithRequiredPrincipal(e => e.Actor);
+
            
             //configure many-to-many
             var complaintCategoryJoinBuilder = modelBuilder
