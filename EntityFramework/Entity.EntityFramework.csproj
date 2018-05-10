@@ -7,8 +7,8 @@
     <ProjectGuid>{F709C67B-654A-45E5-AB5C-F76E5EDB1C07}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EntityFramework</RootNamespace>
-    <AssemblyName>EntityFramework</AssemblyName>
+    <RootNamespace>Entity.EntityFramework</RootNamespace>
+    <AssemblyName>Entity.EntityFramework</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARM", "АРМ Менеджера гостиницы\ARM.csproj", "{C1F6C045-B424-4FE6-A6C4-7EC87BEDB8C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsUI", "АРМ Менеджера гостиницы\WinFormsUI.csproj", "{C1F6C045-B424-4FE6-A6C4-7EC87BEDB8C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entity", "DAL\Entity.csproj", "{5C2AEDA4-A285-4383-AD6A-2CEB11A3516F}"
 EndProject

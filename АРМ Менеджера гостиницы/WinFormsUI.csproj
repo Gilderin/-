@@ -7,8 +7,8 @@
     <ProjectGuid>{C1F6C045-B424-4FE6-A6C4-7EC87BEDB8C3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>АРМ_Менеджера_гостиницы</RootNamespace>
-    <AssemblyName>АРМ Менеджера гостиницы</AssemblyName>
+    <RootNamespace>WinFormsUI</RootNamespace>
+    <AssemblyName>WinFormsUI</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -83,6 +83,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
