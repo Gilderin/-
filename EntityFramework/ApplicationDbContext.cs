@@ -49,9 +49,6 @@ namespace Entity.EntityFramework
             actorBuilder
                 .HasRequired(e => e.Employee)
                 .WithRequiredPrincipal(e => e.Actor);
-            actorBuilder
-                .HasRequired(e => e.Role)
-                .WithRequiredPrincipal(e => e.Actor);
 
            
             //configure many-to-many

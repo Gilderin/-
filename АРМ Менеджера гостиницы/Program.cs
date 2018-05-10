@@ -25,7 +25,7 @@ namespace АРМ_Менеджера_гостиницы
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginForm());
-            Application.Run(new MainForm());
+            //Application.Run(new MainForm());
         }
     }
 }

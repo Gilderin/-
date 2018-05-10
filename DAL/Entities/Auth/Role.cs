@@ -11,8 +11,7 @@ namespace Entity.Entities.Auth
         public Int32 Id { get; set; }
         public String Name { get; set; }
 
-        public Int32 ActorId { get; set; }
-        public virtual Actor Actor { get; set; }
+        public virtual ICollection<Actor> Actors { get; set; }
         public virtual ICollection<Permission> Permissions { get; set; }
     }
 }

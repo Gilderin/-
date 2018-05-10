@@ -37,9 +37,9 @@ namespace Entity.Service
                 return null;
 
             var context = new ApplicationDbContext();
-            var permissions = context.Roles
-                .Where(e => e.ActorId == AuthenticatedActorId)
-                .SelectMany(e => e.Permissions
+            var permissions = context.Actors
+                .Where(e => e.Id == AuthenticatedActorId)
+                .SelectMany(e => e.Role.Permissions
                     .Select(e1 => new
                     {
                         AdminUnit = e1.AdminUnit.Name,
@@ -48,7 +48,8 @@ namespace Entity.Service
                 .ToArray();
 
             var rights = new Dictionary<String, RightsModel>();
-            foreach (var adminUnitName in permissions.Select(e => e.AdminUnit))
+            var adminUnits = context.AdminUnits.Select(e => e.Name).ToArray();
+            foreach (var adminUnitName in adminUnits)
                 rights.Add(adminUnitName, new RightsModel());
 
             foreach (var item in permissions)

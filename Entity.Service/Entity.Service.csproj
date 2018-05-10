@@ -50,7 +50,6 @@
   <ItemGroup>
     <Compile Include="IdentityService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RightsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\Entity.csproj">
