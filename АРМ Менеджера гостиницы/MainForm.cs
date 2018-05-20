@@ -750,5 +750,7 @@ namespace АРМ_Менеджера_гостиницы
             LoadComplaintsGrid();
             LoadSevicesGrid();
         }
+
+
     }
 }

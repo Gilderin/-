@@ -81,12 +81,26 @@
             this.PaymentsUpdateBdButton = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.SplitConteinerComplains = new System.Windows.Forms.SplitContainer();
+            this.ComplaintsSearchButton = new System.Windows.Forms.Button();
+            this.ComplaintstextBox = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.ComplaintscomboBox = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.splitContainerComplains2 = new System.Windows.Forms.SplitContainer();
             this.ComplaintsDataGridView = new System.Windows.Forms.DataGridView();
+            this.ComplaintsRefreshGridButton = new System.Windows.Forms.Button();
+            this.ComplaintsUpdateBdButton = new System.Windows.Forms.Button();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.splitContainer10 = new System.Windows.Forms.SplitContainer();
+            this.ServicesSearchButton = new System.Windows.Forms.Button();
+            this.textBoxServices = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.comboBoxServices = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.splitContainer11 = new System.Windows.Forms.SplitContainer();
             this.ServicesDataGridView = new System.Windows.Forms.DataGridView();
+            this.ServicesUpdateBdButton = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.splitContainer9 = new System.Windows.Forms.SplitContainer();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
@@ -133,18 +147,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.paymentsDataGridView)).BeginInit();
             this.tabPage5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SplitConteinerComplains)).BeginInit();
+            this.SplitConteinerComplains.Panel1.SuspendLayout();
             this.SplitConteinerComplains.Panel2.SuspendLayout();
             this.SplitConteinerComplains.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerComplains2)).BeginInit();
             this.splitContainerComplains2.Panel1.SuspendLayout();
+            this.splitContainerComplains2.Panel2.SuspendLayout();
             this.splitContainerComplains2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ComplaintsDataGridView)).BeginInit();
             this.tabPage6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer10)).BeginInit();
+            this.splitContainer10.Panel1.SuspendLayout();
             this.splitContainer10.Panel2.SuspendLayout();
             this.splitContainer10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer11)).BeginInit();
             this.splitContainer11.Panel1.SuspendLayout();
+            this.splitContainer11.Panel2.SuspendLayout();
             this.splitContainer11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ServicesDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer9)).BeginInit();
@@ -736,12 +754,67 @@
             this.SplitConteinerComplains.Location = new System.Drawing.Point(0, 0);
             this.SplitConteinerComplains.Name = "SplitConteinerComplains";
             // 
+            // SplitConteinerComplains.Panel1
+            // 
+            this.SplitConteinerComplains.Panel1.Controls.Add(this.ComplaintsSearchButton);
+            this.SplitConteinerComplains.Panel1.Controls.Add(this.ComplaintstextBox);
+            this.SplitConteinerComplains.Panel1.Controls.Add(this.label10);
+            this.SplitConteinerComplains.Panel1.Controls.Add(this.ComplaintscomboBox);
+            this.SplitConteinerComplains.Panel1.Controls.Add(this.label8);
+            // 
             // SplitConteinerComplains.Panel2
             // 
             this.SplitConteinerComplains.Panel2.Controls.Add(this.splitContainerComplains2);
             this.SplitConteinerComplains.Size = new System.Drawing.Size(746, 335);
             this.SplitConteinerComplains.SplitterDistance = 247;
             this.SplitConteinerComplains.TabIndex = 0;
+            // 
+            // ComplaintsSearchButton
+            // 
+            this.ComplaintsSearchButton.Location = new System.Drawing.Point(8, 201);
+            this.ComplaintsSearchButton.Name = "ComplaintsSearchButton";
+            this.ComplaintsSearchButton.Size = new System.Drawing.Size(122, 23);
+            this.ComplaintsSearchButton.TabIndex = 14;
+            this.ComplaintsSearchButton.Text = "Произвести поиск";
+            this.ComplaintsSearchButton.UseVisualStyleBackColor = true;
+            // 
+            // ComplaintstextBox
+            // 
+            this.ComplaintstextBox.Location = new System.Drawing.Point(11, 156);
+            this.ComplaintstextBox.Name = "ComplaintstextBox";
+            this.ComplaintstextBox.Size = new System.Drawing.Size(121, 20);
+            this.ComplaintstextBox.TabIndex = 13;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(5, 126);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(153, 13);
+            this.label10.TabIndex = 12;
+            this.label10.Text = "Введите данные для поиска:";
+            // 
+            // ComplaintscomboBox
+            // 
+            this.ComplaintscomboBox.FormattingEnabled = true;
+            this.ComplaintscomboBox.Items.AddRange(new object[] {
+            "Номеру",
+            "Имени",
+            "Фамилии",
+            "Номеру паспорта "});
+            this.ComplaintscomboBox.Location = new System.Drawing.Point(8, 79);
+            this.ComplaintscomboBox.Name = "ComplaintscomboBox";
+            this.ComplaintscomboBox.Size = new System.Drawing.Size(121, 21);
+            this.ComplaintscomboBox.TabIndex = 11;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(8, 49);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(122, 13);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "Произвести поиск по: ";
             // 
             // splitContainerComplains2
             // 
@@ -753,8 +826,13 @@
             // splitContainerComplains2.Panel1
             // 
             this.splitContainerComplains2.Panel1.Controls.Add(this.ComplaintsDataGridView);
+            // 
+            // splitContainerComplains2.Panel2
+            // 
+            this.splitContainerComplains2.Panel2.Controls.Add(this.ComplaintsRefreshGridButton);
+            this.splitContainerComplains2.Panel2.Controls.Add(this.ComplaintsUpdateBdButton);
             this.splitContainerComplains2.Size = new System.Drawing.Size(495, 335);
-            this.splitContainerComplains2.SplitterDistance = 164;
+            this.splitContainerComplains2.SplitterDistance = 233;
             this.splitContainerComplains2.TabIndex = 0;
             // 
             // ComplaintsDataGridView
@@ -764,8 +842,26 @@
             this.ComplaintsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ComplaintsDataGridView.Location = new System.Drawing.Point(0, 0);
             this.ComplaintsDataGridView.Name = "ComplaintsDataGridView";
-            this.ComplaintsDataGridView.Size = new System.Drawing.Size(495, 164);
+            this.ComplaintsDataGridView.Size = new System.Drawing.Size(495, 233);
             this.ComplaintsDataGridView.TabIndex = 0;
+            // 
+            // ComplaintsRefreshGridButton
+            // 
+            this.ComplaintsRefreshGridButton.Location = new System.Drawing.Point(318, 34);
+            this.ComplaintsRefreshGridButton.Name = "ComplaintsRefreshGridButton";
+            this.ComplaintsRefreshGridButton.Size = new System.Drawing.Size(118, 40);
+            this.ComplaintsRefreshGridButton.TabIndex = 5;
+            this.ComplaintsRefreshGridButton.Text = "Обновить таблицу";
+            this.ComplaintsRefreshGridButton.UseVisualStyleBackColor = true;
+            // 
+            // ComplaintsUpdateBdButton
+            // 
+            this.ComplaintsUpdateBdButton.Location = new System.Drawing.Point(25, 34);
+            this.ComplaintsUpdateBdButton.Name = "ComplaintsUpdateBdButton";
+            this.ComplaintsUpdateBdButton.Size = new System.Drawing.Size(118, 40);
+            this.ComplaintsUpdateBdButton.TabIndex = 4;
+            this.ComplaintsUpdateBdButton.Text = "Обновить базу";
+            this.ComplaintsUpdateBdButton.UseVisualStyleBackColor = true;
             // 
             // tabPage6
             // 
@@ -783,12 +879,67 @@
             this.splitContainer10.Location = new System.Drawing.Point(0, 0);
             this.splitContainer10.Name = "splitContainer10";
             // 
+            // splitContainer10.Panel1
+            // 
+            this.splitContainer10.Panel1.Controls.Add(this.ServicesSearchButton);
+            this.splitContainer10.Panel1.Controls.Add(this.textBoxServices);
+            this.splitContainer10.Panel1.Controls.Add(this.label11);
+            this.splitContainer10.Panel1.Controls.Add(this.comboBoxServices);
+            this.splitContainer10.Panel1.Controls.Add(this.label9);
+            // 
             // splitContainer10.Panel2
             // 
             this.splitContainer10.Panel2.Controls.Add(this.splitContainer11);
             this.splitContainer10.Size = new System.Drawing.Size(746, 335);
             this.splitContainer10.SplitterDistance = 195;
             this.splitContainer10.TabIndex = 0;
+            // 
+            // ServicesSearchButton
+            // 
+            this.ServicesSearchButton.Location = new System.Drawing.Point(11, 224);
+            this.ServicesSearchButton.Name = "ServicesSearchButton";
+            this.ServicesSearchButton.Size = new System.Drawing.Size(122, 23);
+            this.ServicesSearchButton.TabIndex = 14;
+            this.ServicesSearchButton.Text = "Произвести поиск";
+            this.ServicesSearchButton.UseVisualStyleBackColor = true;
+            // 
+            // textBoxServices
+            // 
+            this.textBoxServices.Location = new System.Drawing.Point(8, 177);
+            this.textBoxServices.Name = "textBoxServices";
+            this.textBoxServices.Size = new System.Drawing.Size(121, 20);
+            this.textBoxServices.TabIndex = 13;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(5, 143);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(153, 13);
+            this.label11.TabIndex = 12;
+            this.label11.Text = "Введите данные для поиска:";
+            // 
+            // comboBoxServices
+            // 
+            this.comboBoxServices.FormattingEnabled = true;
+            this.comboBoxServices.Items.AddRange(new object[] {
+            "Номеру",
+            "Имени",
+            "Фамилии",
+            "Номеру паспорта "});
+            this.comboBoxServices.Location = new System.Drawing.Point(8, 99);
+            this.comboBoxServices.Name = "comboBoxServices";
+            this.comboBoxServices.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxServices.TabIndex = 11;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(8, 65);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(122, 13);
+            this.label9.TabIndex = 10;
+            this.label9.Text = "Произвести поиск по: ";
             // 
             // splitContainer11
             // 
@@ -800,6 +951,11 @@
             // splitContainer11.Panel1
             // 
             this.splitContainer11.Panel1.Controls.Add(this.ServicesDataGridView);
+            // 
+            // splitContainer11.Panel2
+            // 
+            this.splitContainer11.Panel2.Controls.Add(this.ServicesUpdateBdButton);
+            this.splitContainer11.Panel2.Controls.Add(this.button3);
             this.splitContainer11.Size = new System.Drawing.Size(547, 335);
             this.splitContainer11.SplitterDistance = 247;
             this.splitContainer11.TabIndex = 0;
@@ -812,6 +968,24 @@
             this.ServicesDataGridView.Name = "ServicesDataGridView";
             this.ServicesDataGridView.Size = new System.Drawing.Size(547, 247);
             this.ServicesDataGridView.TabIndex = 0;
+            // 
+            // ServicesUpdateBdButton
+            // 
+            this.ServicesUpdateBdButton.Location = new System.Drawing.Point(62, 24);
+            this.ServicesUpdateBdButton.Name = "ServicesUpdateBdButton";
+            this.ServicesUpdateBdButton.Size = new System.Drawing.Size(118, 40);
+            this.ServicesUpdateBdButton.TabIndex = 6;
+            this.ServicesUpdateBdButton.Text = "Обновить базу";
+            this.ServicesUpdateBdButton.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(367, 24);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(118, 40);
+            this.button3.TabIndex = 5;
+            this.button3.Text = "Обновить таблицу";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // splitContainer9
             // 
@@ -895,18 +1069,24 @@
             this.splitContainer8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.paymentsDataGridView)).EndInit();
             this.tabPage5.ResumeLayout(false);
+            this.SplitConteinerComplains.Panel1.ResumeLayout(false);
+            this.SplitConteinerComplains.Panel1.PerformLayout();
             this.SplitConteinerComplains.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SplitConteinerComplains)).EndInit();
             this.SplitConteinerComplains.ResumeLayout(false);
             this.splitContainerComplains2.Panel1.ResumeLayout(false);
+            this.splitContainerComplains2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerComplains2)).EndInit();
             this.splitContainerComplains2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ComplaintsDataGridView)).EndInit();
             this.tabPage6.ResumeLayout(false);
+            this.splitContainer10.Panel1.ResumeLayout(false);
+            this.splitContainer10.Panel1.PerformLayout();
             this.splitContainer10.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer10)).EndInit();
             this.splitContainer10.ResumeLayout(false);
             this.splitContainer11.Panel1.ResumeLayout(false);
+            this.splitContainer11.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer11)).EndInit();
             this.splitContainer11.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ServicesDataGridView)).EndInit();
@@ -982,5 +1162,19 @@
         private System.Windows.Forms.DataGridView ServicesDataGridView;
         private System.Windows.Forms.SplitContainer splitContainerComplains2;
         private System.Windows.Forms.DataGridView ComplaintsDataGridView;
+        private System.Windows.Forms.Button ComplaintsSearchButton;
+        private System.Windows.Forms.TextBox ComplaintstextBox;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox ComplaintscomboBox;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button ServicesSearchButton;
+        private System.Windows.Forms.TextBox textBoxServices;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox comboBoxServices;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button ComplaintsRefreshGridButton;
+        private System.Windows.Forms.Button ComplaintsUpdateBdButton;
+        private System.Windows.Forms.Button ServicesUpdateBdButton;
+        private System.Windows.Forms.Button button3;
     }
 }
