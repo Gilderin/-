@@ -517,12 +517,238 @@ namespace АРМ_Менеджера_гостиницы
         }
         #endregion
 
+        #region Complaints
+         private BindingList<ComplaintsGridModel> _complaintsGridData;
+        private void LoadComplaintsGrid()
+        {
+            var complaintsGridData = _dbContext.Complaints.Select(e =>
+            new
+            {
+                e.Id,
+                e.Client.Name,
+                e.Client.SecondName,
+       
+
+
+            }).ToArray();
+
+            ComplaintsDataGridView.DataSource = new BindingSource { DataSource = complaintGridData };
+
+            //setup columns
+            ComplaintsDataGridView.Columns.Clear();
+            var columns = new DataGridViewColumn[]
+            {
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name ="Id",
+                    DataPropertyName = "Id",
+                    HeaderText = "Id"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name ="Name",
+                    DataPropertyName = "Name",
+                    HeaderText = "Имя"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name ="SecondName",
+                    DataPropertyName = "SecondName",
+                    HeaderText = "Фамилия"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                Name = "ArrivalDate",
+                DataPropertyName = "ArrivalDate",
+                HeaderText = "Дата въезда"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name = "DapartureDate",
+                    DataPropertyName = "DepartureDate",
+                    HeaderText = "Дата выезда"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name = "Capacity",
+                    DataPropertyName = "PeopleCount",
+                    HeaderText = "Количество человек"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name = "Number",
+                    DataPropertyName = "Number",
+                    HeaderText = "Номер комнаты"
+                },
+                 new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name = "Cost",
+                    DataPropertyName = "Cost",
+                    HeaderText = "Стоимость номера"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name = "ReceiptOfPayment",
+                    DataPropertyName = "ReceiptOfPayment",
+                    HeaderText = "Оплата"
+                },
+                  new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name = "EmployeeSecondName",
+                    DataPropertyName = "EmployeeName",
+                    HeaderText = "Сотрудник оформивший"
+                }
+
+            };
+            foreach (var item in columns)
+            {
+                paymentsDataGridView.Columns.Add(item);
+            }
+
+            String complaintsAdminUnit = AdminUnitType.Complaints.ToString();
+            ComplaintsDataGridView.AllowUserToDeleteRows = this._userPermissions[complaintsAdminUnit].CanDelete;
+            ComplaintsDataGridView.AllowUserToAddRows = this._userPermissions[complaintsAdminUnit].CanAdd;
+        }
+        #endregion
+
+        #region Services
+        private BindingList<ServicesGridModel> _servicesridData;
+        private void SetupServicesGridColumns()
+        {
+            //setup columns
+            ServicesDataGridView.AutoGenerateColumns = false;
+            ServicesDataGridView.Columns.Clear();
+
+            var columns = new DataGridViewColumn[]
+            {
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name ="Id",
+                    DataPropertyName = "Id",
+                    HeaderText = "Id"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name ="Name",
+                    DataPropertyName = "Name",
+                    HeaderText = "Имя"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name ="SecondName",
+                     DataPropertyName = "SecondName",
+                    HeaderText = "Фамилия"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name ="Position",
+                    DataPropertyName = "Position",
+                    HeaderText = "Должность"
+                },
+                new DataGridViewColumn(new DataGridViewTextBoxCell())
+                {
+                    Name ="NumberPhone",
+                    DataPropertyName = "NumberPhone",
+                    HeaderText = "Номер телефона"
+                }
+            };
+            foreach (var item in columns)
+            {
+                servicesDataGridView.Columns.Add(item);
+            }
+        }
+        private void SetupServicesDataSource()
+        {
+            var servicesGridData = _dbContext.Services.Select(e => new ServicesGridModel()
+            {
+                Id = e.Id,
+           
+        
+            }).ToArray();
+            _servicesGridData = new BindingList<ServicesGridModel>(servicesGridData);
+            var servicesBindingSource = new BindingSource(_servicesGridData, null);
+            servicesDataGridView.DataSource = servicesBindingSource;
+        }
+        private void LoadSevicesGrid()
+        {
+            SetupServicesDataSource();
+            SetupServicesGridColumns();
+            String servicesAdminUnit = AdminUnitType.Services.ToString();
+            servicesDataGridView.AllowUserToDeleteRows = this._userPermissions[servicesAdminUnit].CanDelete;
+            servicesDataGridView.AllowUserToAddRows = this._userPermissions[servicesAdminUnit].CanAdd;
+        }
+        private void UpdateServicesGridDbData()
+        {
+            var dbData = _dbContext.Services.ToList();
+
+            //remove deleted from db
+           var employeesToRemove = dbData
+               .Where(dbEmployee => !_employeesGridData.Any(e => dbEmployee.Id == e.Id))
+                .ToList();
+            _dbContext.Employees.RemoveRange(ToRemove);
+
+            //add new clients to db
+            var employeesToAdd = _employeesGridData
+                .Where(dataGridEmployee => !dbData.Any(e => dataGridEmployee.Id == e.Id))
+                .ToList();
+
+            var positionsToAdd = employeesToAdd
+                .Select(e => e.Position)
+                .Where(e => _dbContext.Positions.Any(e1 => e1.Name == e))
+                .Select(e => new Position
+                {
+                    Name = e
+                });
+
+            var newEmployeesToAdd = employeesToAdd.Select(e => new Employee()
+            {
+                Id = e.Id,
+                Name = e.Name,
+                SecondName = e.SecondName,
+                Position = positionsToAdd
+                    .Where(e1 => e1.Name == e.Position)
+                    .Single(),
+                NumberPhone = e.PhoneNumber
+            });
+
+
+            _dbContext.Employees.AddRange(newEmployeesToAdd);
+            _dbContext.SaveChanges();
+        }
+        private void RefreshServicesGrid()
+        {
+            this._employeesGridData.Clear();
+            var data = _dbContext.Employees.Select(e => new EmployeesGridModel()
+            {
+                Id = e.Id,
+                Name = e.Name,
+                SecondName = e.SecondName,
+                Position = e.Position.Name,
+                PhoneNumber = e.NumberPhone
+            })
+            .ToList();
+            foreach (var item in data)
+            {
+                this._employeesGridData.Add(item);
+            }
+        }
+        private void ServicesUpdateBdButton_Click(object sender, EventArgs e)
+        {
+            UpdateServicesGridDbData();
+        }
+        private void ServicesfreshGridButton_Click(object sender, EventArgs e)
+        {
+            RefreshServicesGrid();
+        }
+        #endregion
         private void MainForm_Load(object sender, EventArgs eventArgs)
         {
             LoadRoomsGrid();
             LoadClientsGrid();
             LoadEmployeesGrid();
             LoadPaymentsGrid();
+            LoadComplaintsGrid();
+            LoadSevicesGrid();
         }
     }
 }

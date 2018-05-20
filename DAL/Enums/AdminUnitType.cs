@@ -11,6 +11,8 @@ namespace Entity.Enums
         Clients = 1,
         Rooms = 2,
         Payments = 3,
-        Employees = 4
+        Employees = 4,
+        Complaints = 5,
+        Services= 6
     }
 }

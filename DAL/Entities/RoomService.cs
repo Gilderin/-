@@ -9,6 +9,7 @@ namespace Entity.Entities
     public class RoomService
     {
         public Int32 Id { get; set; }
+        public String Name { get; set; }
         public DateTimeOffset Date { get; set; }
 
         public Int32 EmployeeId { get; set; }
