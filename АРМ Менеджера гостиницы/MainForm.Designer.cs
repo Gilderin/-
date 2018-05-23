@@ -437,6 +437,7 @@
             this.SearchClientButton.TabIndex = 0;
             this.SearchClientButton.Text = "Произвести поиск";
             this.SearchClientButton.UseVisualStyleBackColor = true;
+            this.SearchClientButton.Click += new System.EventHandler(this.SearchClientButton_Click);
             // 
             // splitContainer5
             // 

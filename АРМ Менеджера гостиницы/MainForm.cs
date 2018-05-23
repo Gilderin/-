@@ -31,7 +31,8 @@ namespace АРМ_Менеджера_гостиницы
         }
 
         #region clients
-        private BindingList<ClientsGridModel> _clientsGridData;
+        private IEnumerable<ClientsGridModel> _clientsData; //all in memory loaded clients data
+        private BindingList<ClientsGridModel> _clientsGridData; //filtered clients data
         private void LoadClientsGrid()
         {
             SetupClientsDataSource();
@@ -53,7 +54,8 @@ namespace АРМ_Менеджера_гостиницы
                         DateOfBirth = e.DateOfBirth
                     })
                     .ToList();
-            _clientsGridData = new BindingList<ClientsGridModel>(clientsGridData);
+            _clientsData = clientsGridData; 
+            _clientsGridData = new BindingList<ClientsGridModel>(clientsGridData); 
             var clientsBindingSource = new BindingSource(_clientsGridData, null);
             clientsDataGridView.DataSource = clientsBindingSource;
         }
@@ -144,6 +146,58 @@ namespace АРМ_Менеджера_гостиницы
                 this._clientsGridData.Add(item);
             }
         }
+        private void ApplyClientsFilter(String field, String data)
+        {
+            IEnumerable<ClientsGridModel> filteredCollection = new List<ClientsGridModel>(_clientsData);
+
+            if (field == "Номеру")
+            {
+
+                filteredCollection = filteredCollection
+                    .Where(e => 
+                    {
+                        try
+                        {
+                            return e.Id == Int32.Parse(data);
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                            //если словишь тут букву то пиздец
+                        }
+                    });
+
+            }
+
+            if (field == "Имени")
+            {
+                filteredCollection = filteredCollection
+                   .Where(e => e.Name.Contains(data));
+            }
+
+            if (field == "Фамилии")
+            {
+                filteredCollection = filteredCollection
+                   .Where(e => e.SecondName.Contains(data));
+            }
+
+            if (field == "Номеру паспорта")
+            {
+                filteredCollection = filteredCollection
+                   .Where(e => e.PassportNumber.Contains(data));
+            }
+
+            //и снова злоебучаяя кириллица
+            //убейте меня блядь
+
+            _clientsGridData.Clear();
+            foreach (var item in filteredCollection)
+            {
+                _clientsGridData.Add(item);
+            }
+
+            //ааа бунд блядь!
+        }
         private void clientsUpdateDbButton_Click(object sender, EventArgs e)
         {
             UpdateClientsGridDbData();
@@ -152,7 +206,12 @@ namespace АРМ_Менеджера_гостиницы
         {
             RefreshClientsGrid();
         }
+        private void SearchClientButton_Click(object sender, EventArgs e)
+        {
+            ApplyClientsFilter(comboBoxSearchClient.Text, textBoxSearchClient.Text);
+        }
         #endregion
+
 
         #region rooms
         private BindingList<RoomsGridModel> _roomsGridData;
@@ -683,6 +742,7 @@ namespace АРМ_Менеджера_гостиницы
             RefreshServicesGrid();
         }
         #endregion
+
         private void MainForm_Load(object sender, EventArgs eventArgs)
         {
             LoadRoomsGrid();
@@ -698,5 +758,7 @@ namespace АРМ_Менеджера_гостиницы
         {
            
         }
+
+
     }
 }
