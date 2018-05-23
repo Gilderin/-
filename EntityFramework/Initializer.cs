@@ -118,6 +118,16 @@ namespace Entity.EntityFramework
                     Id = (Int32)AdminUnitType.Rooms,
                     Name = AdminUnitType.Rooms.ToString()
                 },
+                new AdminUnit()
+                {
+                    Id=(Int32)AdminUnitType.Services,
+                    Name = AdminUnitType.Services.ToString()
+                },
+                       new AdminUnit()
+                {
+                    Id=(Int32)AdminUnitType.Complaints,
+                    Name = AdminUnitType.Complaints.ToString()
+                },
             };
             context.AdminUnits.AddRange(adminUnits);
             context.SaveChanges();
@@ -207,6 +217,45 @@ namespace Entity.EntityFramework
                     PermissionTypeId = (Int32)PermissionTypes.Read,
                     AdminUnitId = (Int32)AdminUnitType.Employees
                 },
+
+                 //Services admin unit for admin role
+                new Permission()
+                {
+                    RoleId = 1,
+                    PermissionTypeId = (Int32)PermissionTypes.Add,
+                    AdminUnitId = (Int32)AdminUnitType.Services
+                },
+                new Permission()
+                {
+                    RoleId = 1,
+                    PermissionTypeId = (Int32)PermissionTypes.Delete,
+                    AdminUnitId = (Int32)AdminUnitType.Services
+                },
+                new Permission()
+                {
+                    RoleId = 1,
+                    PermissionTypeId = (Int32)PermissionTypes.Read,
+                    AdminUnitId = (Int32)AdminUnitType.Services
+                },
+                 //Complaints admin unit for admin role
+                new Permission()
+                {
+                    RoleId = 1,
+                    PermissionTypeId = (Int32)PermissionTypes.Add,
+                    AdminUnitId = (Int32)AdminUnitType.Complaints
+                },
+                new Permission()
+                {
+                    RoleId = 1,
+                    PermissionTypeId = (Int32)PermissionTypes.Delete,
+                    AdminUnitId = (Int32)AdminUnitType.Complaints
+                },
+                new Permission()
+                {
+                    RoleId = 1,
+                    PermissionTypeId = (Int32)PermissionTypes.Read,
+                    AdminUnitId = (Int32)AdminUnitType.Complaints
+                }
             };
             context.Permissions.AddRange(permissions);
             context.SaveChanges();

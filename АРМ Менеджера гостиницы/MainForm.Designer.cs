@@ -209,6 +209,7 @@
             this.выводОтчетаToolStripMenuItem.Name = "выводОтчетаToolStripMenuItem";
             this.выводОтчетаToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
             this.выводОтчетаToolStripMenuItem.Text = "Вывод отчета";
+            this.выводОтчетаToolStripMenuItem.Click += new System.EventHandler(this.выводОтчетаToolStripMenuItem_Click);
             // 
             // выходToolStripMenuItem
             // 
@@ -766,7 +767,7 @@
             // 
             this.SplitConteinerComplains.Panel2.Controls.Add(this.splitContainerComplains2);
             this.SplitConteinerComplains.Size = new System.Drawing.Size(746, 335);
-            this.SplitConteinerComplains.SplitterDistance = 247;
+            this.SplitConteinerComplains.SplitterDistance = 169;
             this.SplitConteinerComplains.TabIndex = 0;
             // 
             // ComplaintsSearchButton
@@ -831,7 +832,7 @@
             // 
             this.splitContainerComplains2.Panel2.Controls.Add(this.ComplaintsRefreshGridButton);
             this.splitContainerComplains2.Panel2.Controls.Add(this.ComplaintsUpdateBdButton);
-            this.splitContainerComplains2.Size = new System.Drawing.Size(495, 335);
+            this.splitContainerComplains2.Size = new System.Drawing.Size(573, 335);
             this.splitContainerComplains2.SplitterDistance = 233;
             this.splitContainerComplains2.TabIndex = 0;
             // 
@@ -842,7 +843,7 @@
             this.ComplaintsDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ComplaintsDataGridView.Location = new System.Drawing.Point(0, 0);
             this.ComplaintsDataGridView.Name = "ComplaintsDataGridView";
-            this.ComplaintsDataGridView.Size = new System.Drawing.Size(495, 233);
+            this.ComplaintsDataGridView.Size = new System.Drawing.Size(573, 233);
             this.ComplaintsDataGridView.TabIndex = 0;
             // 
             // ComplaintsRefreshGridButton
@@ -891,7 +892,7 @@
             // 
             this.splitContainer10.Panel2.Controls.Add(this.splitContainer11);
             this.splitContainer10.Size = new System.Drawing.Size(746, 335);
-            this.splitContainer10.SplitterDistance = 195;
+            this.splitContainer10.SplitterDistance = 171;
             this.splitContainer10.TabIndex = 0;
             // 
             // ServicesSearchButton
@@ -956,7 +957,7 @@
             // 
             this.splitContainer11.Panel2.Controls.Add(this.ServicesUpdateBdButton);
             this.splitContainer11.Panel2.Controls.Add(this.button3);
-            this.splitContainer11.Size = new System.Drawing.Size(547, 335);
+            this.splitContainer11.Size = new System.Drawing.Size(571, 335);
             this.splitContainer11.SplitterDistance = 247;
             this.splitContainer11.TabIndex = 0;
             // 
@@ -966,7 +967,7 @@
             this.ServicesDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ServicesDataGridView.Location = new System.Drawing.Point(0, 0);
             this.ServicesDataGridView.Name = "ServicesDataGridView";
-            this.ServicesDataGridView.Size = new System.Drawing.Size(547, 247);
+            this.ServicesDataGridView.Size = new System.Drawing.Size(571, 247);
             this.ServicesDataGridView.TabIndex = 0;
             // 
             // ServicesUpdateBdButton
