@@ -14,8 +14,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.Excel;
+using System.IO;
+using System.Deployment.Application;
+using System.Reflection;
 
-namespace АРМ_Менеджера_гостиницы
+namespace WinFormsUI    
 {
     public partial class MainForm : Form
     {
@@ -754,9 +757,37 @@ namespace АРМ_Менеджера_гостиницы
             
         }
 
-        private void выводОтчетаToolStripMenuItem_Click(object sender, EventArgs e)
+        private void createReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+            try
+            {
+                var filename = DateTime.Now.ToString();
+                filename = filename.Replace(' ', '_');
+                filename = filename.Replace(':', '_');
+                filename = filename.Replace('.', '_');
+                var fileContent = "";
+                var path = "";
+                var tabName = "";
+                if (tabControl1.TabIndex == 1)// for clients tab
+                {
+                    tabName = "Clients";
+                    foreach (var item in _clientsGridData)
+                    {
+                        fileContent += item.ToString() + Environment.NewLine;
+                    }
+                    
+                }
+                filename += $"_{tabName}.txt";
+                string exeFilePath = (new Uri(Assembly.GetEntryAssembly().CodeBase)).AbsolutePath;
+                String exeDirPath = Path.GetDirectoryName(exeFilePath);
+                path = exeDirPath + $"\\Reports\\{tabName}\\" + filename;
+                File.WriteAllText(path, fileContent);
+                MessageBox.Show("Report created " + path);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
 

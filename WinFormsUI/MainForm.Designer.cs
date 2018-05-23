@@ -1,4 +1,4 @@
-﻿namespace АРМ_Менеджера_гостиницы
+﻿namespace WinFormsUI
 {
     partial class MainForm
     {
@@ -32,7 +32,7 @@
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.обновитьБазуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.обновитьТаблицуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.выводОтчетаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -175,7 +175,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuToolStripMenuItem,
-            this.выводОтчетаToolStripMenuItem,
+            this.createReportToolStripMenuItem,
             this.выходToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -204,12 +204,12 @@
             this.обновитьТаблицуToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.обновитьТаблицуToolStripMenuItem.Text = "Обновить таблицу";
             // 
-            // выводОтчетаToolStripMenuItem
+            // createReportToolStripMenuItem
             // 
-            this.выводОтчетаToolStripMenuItem.Name = "выводОтчетаToolStripMenuItem";
-            this.выводОтчетаToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
-            this.выводОтчетаToolStripMenuItem.Text = "Вывод отчета";
-            this.выводОтчетаToolStripMenuItem.Click += new System.EventHandler(this.выводОтчетаToolStripMenuItem_Click);
+            this.createReportToolStripMenuItem.Name = "createReportToolStripMenuItem";
+            this.createReportToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
+            this.createReportToolStripMenuItem.Text = "Вывод отчета";
+            this.createReportToolStripMenuItem.Click += new System.EventHandler(this.createReportToolStripMenuItem_Click);
             // 
             // выходToolStripMenuItem
             // 
@@ -1130,7 +1130,7 @@
         private System.Windows.Forms.SplitContainer splitContainer8;
         private System.Windows.Forms.Button PaymentsRefreshGridButton;
         private System.Windows.Forms.Button PaymentsUpdateBdButton;
-        private System.Windows.Forms.ToolStripMenuItem выводОтчетаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem createReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem обновитьБазуToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem обновитьТаблицуToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem выходToolStripMenuItem;

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using Entity.EntityFramework;
 using Entity.Entities;
 
-namespace АРМ_Менеджера_гостиницы
+namespace WinFormsUI
 {
     static class Program
     {

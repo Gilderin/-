@@ -13,5 +13,10 @@ namespace Model.GridModels
         public String SecondName { get; set; }
         public String PassportNumber { get; set; }
         public DateTimeOffset DateOfBirth { get; set; }
+
+        public override string ToString()
+        {
+            return $"ID:{Id} Name:{Name} SecondName:{SecondName} PassportNumber:{PassportNumber} DateOfBirth:{DateOfBirth}";
+        }
     }
 }

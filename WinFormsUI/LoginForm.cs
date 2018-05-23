@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace АРМ_Менеджера_гостиницы
+namespace WinFormsUI
 {
     public partial class LoginForm : Form
     {

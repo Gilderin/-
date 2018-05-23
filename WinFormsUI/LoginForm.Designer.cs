@@ -1,4 +1,4 @@
-﻿namespace АРМ_Менеджера_гостиницы
+﻿namespace WinFormsUI
 {
     partial class LoginForm
     {
